@@ -729,6 +729,28 @@ class Converter
 			DROP `siteurl`,
 			DROP `timeoffset`,
 			DROP `attachments`,
+			DROP `attachmax`,
+			DROP `counter`,
+			DROP `flood_interval`,
+			DROP `forumdate`,
+			DROP `guestposts`,
+			DROP `numofthreads`,
+			DROP `photo_h`,
+			DROP `photo_max_b`,
+			DROP `photo_max_h`,
+			DROP `photo_max_w`,
+			DROP `photo_w`,
+			DROP `recaptcha_glob_key`,
+			DROP `recaptcha_priv_key`,
+			DROP `subheaderdate`,
+			DROP `thread_notify`,
+			DROP `thumbs_per_page`,
+			DROP `thumbs_per_row`,
+			DROP `thumb_compression`,
+			DROP `thumb_h`,
+			DROP `thumb_w`,
+			DROP `tinymce_enabled`,
+			DROP `display_validation`,
 			CHANGE `sitename` `site_name` VARCHAR(200) NOT NULL DEFAULT '',
 			CHANGE `footer` `footer` VARCHAR(200) NOT NULL DEFAULT '<div style=\'text-align:center\'>Copyright &copy; 2005 - ".@date("Y")." by the eXtreme-Fusion Crew</div>',
 			CHANGE `theme` `theme` VARCHAR(100) NOT NULL DEFAULT 'eXtreme-Fusion-5',
@@ -736,9 +758,11 @@ class Converter
 			CHANGE `siteusername` `site_username` VARCHAR(100) NOT NULL DEFAULT '',
 			CHANGE `siteintro` `site_intro` VARCHAR(100) NOT NULL DEFAULT '',
 			CHANGE `sitebanner` `site_banner` VARCHAR(100) NOT NULL DEFAULT '', 
-			ADD `language_detection` TEXT NOT NULL AFTER `locale`, 
 			ADD `site_banner1` TEXT NOT NULL AFTER `site_banner`, 
 			ADD `site_banner2` TEXT NOT NULL AFTER `site_banner1`,
+			ADD `avatar_width` TEXT NOT NULL AFTER `site_banner2`, 
+			ADD `avatar_height` TEXT NOT NULL AFTER `avatar_width`, 
+			ADD `avatar_filesize` TEXT NOT NULL AFTER `avatar_height`,
 			ADD `smtp_port` TEXT NOT NULL AFTER `smtp_host`,
 			ADD `news_photo_w` TEXT NOT NULL AFTER `smtp_password`,
 			ADD `news_photo_h` TEXT NOT NULL AFTER `news_photo_w`,
@@ -768,10 +792,23 @@ class Converter
 			ADD `validation` TEXT NOT NULL AFTER `admin_activation`,
 			ADD `hide_userprofiles` TEXT NOT NULL AFTER `validation`,
 			ADD `userthemes` TEXT NOT NULL AFTER `hide_userprofiles`,
+			ADD `language_detection` TEXT NOT NULL AFTER `keywords`,
 			ADD `deactivation_action` TEXT NOT NULL AFTER `userthemes`,
-			ADD `change_name` TEXT NOT NULL AFTER `deactivation_action`,
+			ADD `change_name` TEXT NOT NULL AFTER `userthemes`,
 			ADD `maintenance_level` TEXT NOT NULL AFTER `maintenance_message`,
-			ADD `maintenance_form` TEXT NOT NULL AFTER `maintenance_level`
+			ADD `maintenance_form` TEXT NOT NULL AFTER `maintenance_level`,
+			ADD `default_search` TEXT NOT NULL AFTER `maintenance_form`,
+			ADD `deactivation_period` TEXT NOT NULL AFTER `default_search`,
+			ADD `deactivation_response` TEXT NOT NULL AFTER `deactivation_period`,
+			ADD `news_cats_item_per_page` TEXT NOT NULL AFTER `deactivation_response`,
+			ADD `news_per_page` TEXT NOT NULL AFTER `news_cats_item_per_page`,
+			ADD `notes_per_page` TEXT NOT NULL AFTER `news_per_page`,
+			ADD `users_per_page` TEXT NOT NULL AFTER `notes_per_page`,
+			ADD `comments_per_page` TEXT NOT NULL AFTER `users_per_page`,
+			ADD `notes` TEXT NOT NULL AFTER `version`,
+			ADD `loging` TEXT NOT NULL AFTER `notes`,
+			ADD `routing` TEXT NOT NULL AFTER `loging`,
+			ADD `cache` TEXT NOT NULL AFTER `routing`
 		");
 		
 		if ($query)
@@ -780,9 +817,9 @@ class Converter
 			$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."settings_tmp");
 			$query = $this->dbQuery("CREATE TABLE ".$this->_db_prefix."settings_tmp 
 				(
-					settings_name VARCHAR(200) NOT NULL DEFAULT '',
-					settings_value TEXT NOT NULL,
-					PRIMARY KEY (settings_name)
+					`key` VARCHAR(100) NOT NULL DEFAULT '',
+					`value` text NOT NULL,
+					PRIMARY KEY (`key`)
 				) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 			");
 			
@@ -793,7 +830,7 @@ class Converter
 			foreach ($settings as $key => $value) 
 			{
 				$query = $this->dbQuery("INSERT INTO ".$this->_db_prefix."settings_tmp 
-					(`settings_name`, `settings_value`) VALUES ('$key', '$value')
+					(`key`, `value`) VALUES ('$key', '$value')
 				");
 			}
 			

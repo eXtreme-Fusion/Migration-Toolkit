@@ -371,6 +371,7 @@ else
 	}
 
 }
+
 echo "
 <div style='text-align:right'><a href='http://rafik.eu' class='small' style='font-style: italic;' title=\"Rafał (Rafik89) Krupiński - profesjonalny webmaster. Tworzenie stron internetowych z wykorzystaniem: HTML, (x)HTML, XML, CSS, PHP (OOP), MySQL, UML, JS (jQuery), OPT\">&copy Rafał (Rafik89) Krupiński</a>\n</div>\n
 </body>
