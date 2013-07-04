@@ -15,12 +15,7 @@
 | written permission from the original author(s).
 | 
 **********************************************************/
-/*
-	Autor: Rafał Krupiński
-	Data utworzenia: 3 lipca 2013
-	E-mail: kontakt@rafik.eu
-	Adres WWW: http://rafik.eu 
-*/
+
 class Converter
 {
 	// Przechowuje tablicę z tłumaczeniem na wybrane języki
@@ -847,6 +842,21 @@ class Converter
 			if ($query)
 			{
 				// Zapytania aktualizujące ustawienia
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = 'news' WHERE `key` = 'opening_page'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = 'eXtreme-Fusion-5' WHERE `key` = 'theme'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'language_detection'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = 'themes/eXtreme-Fusion-5/templates/images/header_logo.png' WHERE `key` = 'site_banner'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '100' WHERE `key` = 'avatar_width'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '100' WHERE `key` = 'avatar_height'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '102400' WHERE `key` = 'avatar_filesize'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '587' WHERE `key` = 'smtp_port'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '400' WHERE `key` = 'news_photo_w'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '300' WHERE `key` = 'news_photo_h'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'news_image_frontpage'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'news_image_readmore'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'cookie_secure'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".$_SERVER['HTTP_HOST']."' WHERE `key` = 'cookie_domain'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '/' WHERE `key` = 'cookie_patch'");
 			}
 		}
 		

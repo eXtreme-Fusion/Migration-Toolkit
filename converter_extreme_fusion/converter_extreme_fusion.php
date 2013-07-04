@@ -15,12 +15,6 @@
 | written permission from the original author(s).
 | 
 **********************************************************/
-/*
-	Autor: Rafał Krupiński
-	Data utworzenia: 20 czerwca 2013
-	E-mail: kontakt@rafik.eu
-	Adres WWW: http://rafik.eu 
-*/
 
 if ( ! isset($_COOKIE['efc_core']))
 {
@@ -94,11 +88,6 @@ else
 				W przypadku gdy wtyczka napotkałaby błąd, Twoja strona mogła by działać nie stabilnie.<br />
 				Dlatego zaleca się aby przed wykonywaniem tej czynności zaopatrzyć się w kopię całej bazy danych którą wykonasz takim narzędziem jak PHPMyAdmin, Chive, SQLBuddy itp.<br /><br /><br />
 				W przypadku wystąpienie błędu proszę o kontakt z Autorem wtyczki, na pewno zrobi wszystko aby poprawić ten błąd. <br />
-				Kontakt:<br />
-				Skype: rafalek.krupinski<br />
-				GG: 530250<br />
-				E-mail: kontakt@rafik.eu<br />
-				WWW: http://rafik.eu
 			</p>
 			<p class='bold status valid'>
 				Aby przejść do kolejnego kroku kliknij na przycisk <strong>\"Dalej\"</strong>.
@@ -373,8 +362,7 @@ else
 }
 
 echo "
-<div style='text-align:right'><a href='http://rafik.eu' class='small' style='font-style: italic;' title=\"Rafał (Rafik89) Krupiński - profesjonalny webmaster. Tworzenie stron internetowych z wykorzystaniem: HTML, (x)HTML, XML, CSS, PHP (OOP), MySQL, UML, JS (jQuery), OPT\">&copy Rafał (Rafik89) Krupiński</a>\n</div>\n
-</body>
+<body>
 </html>";
 mysql_close();
 ob_end_flush();

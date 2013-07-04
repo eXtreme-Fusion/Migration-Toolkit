@@ -15,12 +15,6 @@
 | written permission from the original author(s).
 | 
 **********************************************************/
-/*
-	Autor: Rafa³ Krupiñski
-	Data utworzenia: 20 czerwca 2013
-	E-mail: kontakt@rafik.eu
-	Adres WWW: http://rafik.eu 
-*/
 
 $locale['EFC_name'] = "Konwerter bazy eXtreme-Fusion 4.17 -> eXtreme-Fusion 5.0.3";
 $locale['EFC_desc'] = "Narzêdzie s³u¿±ce do odpowiedniej zmiany struktury bazy eXtreme-Fusion 4.17 do dzia³ania z eXtreme-Fusion 5.0.3";

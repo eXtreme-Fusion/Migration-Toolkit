@@ -15,12 +15,6 @@
 | written permission from the original author(s).
 | 
 **********************************************************/
-/*
-	Autor: Rafa³ Krupiñski
-	Data utworzenia: 20 czerwca 2013
-	E-mail: kontakt@rafik.eu
-	Adres WWW: http://rafik.eu 
-*/
 if ( ! defined('IN_FUSION') || ! checkrights('I')) 
 {
 	header('Location: ../../index.php'); exit; 
@@ -38,9 +32,9 @@ else
 $inf_title = $locale['EFC_name'];
 $inf_description = $locale['EFC_desc'];
 $inf_version = '1.0';
-$inf_developer = 'Rafik89';
-$inf_email = 'kontakt@rafik.eu';
-$inf_weburl = 'http://rafik.eu';
+$inf_developer = 'eXtreme Crew';
+$inf_email = 'rafik89@extreme-fusion.pl';
+$inf_weburl = 'http://extreme-fusion.org';
 
 $inf_folder = 'converter_extreme_fusion';
 $inf_admin_image = '';
