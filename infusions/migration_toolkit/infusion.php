@@ -20,13 +20,13 @@ if ( ! defined('IN_FUSION') || ! checkrights('I'))
 	header('Location: ../../index.php'); exit; 
 }
 
-if (file_exists(INFUSIONS.'converter_extreme_fusion/locale/'.$settings['locale'].'.php')) 
+if (file_exists(INFUSIONS.'migration_toolkit/locale/'.$settings['locale'].'.php')) 
 {
-	include INFUSIONS.'converter_extreme_fusion/locale/'.$settings['locale'].'.php';
+	include INFUSIONS.'migration_toolkit/locale/'.$settings['locale'].'.php';
 } 
 else
 {
-	include INFUSIONS.'converter_extreme_fusion/locale/English.php';
+	include INFUSIONS.'migration_toolkit/locale/English.php';
 }
 
 $inf_title = $locale['EFC_name'];
@@ -36,7 +36,6 @@ $inf_developer = 'eXtreme Crew';
 $inf_email = 'rafik89@extreme-fusion.pl';
 $inf_weburl = 'http://extreme-fusion.org';
 
-$inf_folder = 'converter_extreme_fusion';
+$inf_folder = 'migration_toolkit';
 $inf_admin_image = '';
-$inf_admin_panel = 'converter_extreme_fusion.php';
-?>
+$inf_admin_panel = 'migration_toolkit.php';
