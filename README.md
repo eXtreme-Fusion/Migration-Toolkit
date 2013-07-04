@@ -1,4 +1,4 @@
 Migration Toolkit
 =================
 
-Updater of eXtreme-Fusion 4.17 to eXtreme-Fusion 5.
+Tool for updating system from eXtreme-Fusion 4.17 to eXtreme-Fusion 5.
