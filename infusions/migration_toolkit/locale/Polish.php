@@ -17,7 +17,7 @@
 **********************************************************/
 
 $locale['EFC_name'] = "Migration Toolkit";
-$locale['EFC_desc'] = "Narzêdzie s³u¿±ce do odpowiedniej zmiany struktury bazy eXtreme-Fusion 4.17 do dzia³ania z eXtreme-Fusion 5.0.3";
+$locale['EFC_desc'] = "NarzÄ™dzie sÅ‚uÅ¼Ä…ce do odpowiedniej zmiany struktury bazy eXtreme-Fusion 4.17 do dziaÅ‚ania z eXtreme-Fusion 5.0.3";
 
 // Panels
 $EFC_Locale['EFC_160'] = "Nawigacja";
@@ -25,89 +25,89 @@ $EFC_Locale['EFC_161'] = "Aktualnie online";
 $EFC_Locale['EFC_162'] = "Ostatnio na forum";
 
 // User Field
-$EFC_Locale['First name'] = "Imiê";
+$EFC_Locale['First name'] = "ImiÄ™";
 $EFC_Locale['Date of birth'] = "Data urodzenia";
 $EFC_Locale['Gadu-Gadu'] = "Gadu-Gadu";
 $EFC_Locale['Skype'] = "Skype";
 $EFC_Locale['Website'] = "Strona WWW";
-$EFC_Locale['Living place'] = "Miejscowo¶æ";
+$EFC_Locale['Living place'] = "MiejscowoÅ›Ä‡";
 $EFC_Locale['Signature'] = "Podpis";
 
 // User Field Categories
 $EFC_Locale['Information'] = "Informacje kontaktowe";
 $EFC_Locale['Contact Information'] = "Informacje kontaktowe";
-$EFC_Locale['Miscellaneous'] = "Ró¿ne";
+$EFC_Locale['Miscellaneous'] = "RÃ³Å¼ne";
 
 // Panels
 $EFC_Locale['Navigation'] = "Nawigacja";
 $EFC_Locale['Online Users'] = "Aktualnie online";
 $EFC_Locale['Welcome Message'] = "Powitanie";
-$EFC_Locale['User Panel'] = "Panel U¿ytkownika";
+$EFC_Locale['User Panel'] = "Panel UÅ¼ytkownika";
 
 // Permission
 $EFC_Locale['Administration'] = 'Administracja';
 $EFC_Locale['Site'] = 'Strona';
 // Permissions
 $EFC_Locale['Perm: admin login'] = 'Logowanie do Panelu Admina.';
-$EFC_Locale['Perm: admin bbcodes'] = 'Zarz±dzanie tagami BBCodes.';
-$EFC_Locale['Perm: admin blacklist'] = 'Dostêp do czarnej listy.';
-$EFC_Locale['Perm: admin comments'] = 'Dostêp do zarz±dzania komentarzami.';
-$EFC_Locale['Perm: admin logs'] = 'Dostêp do logów strony.';
-$EFC_Locale['Perm: admin urls'] = 'Dostêp do generatora linków.';
-$EFC_Locale['Perm: admin news_cats'] = 'Dostêp do kategorii newsów.';
-$EFC_Locale['Perm: admin news'] = 'Dodawanie newsów z poziomu administratora.';
-$EFC_Locale['Perm: admin panels'] = 'Dostêp do zarz±dzania panelami.';
-$EFC_Locale['Perm: admin permissions'] = 'Mo¿liwo¶æ dodawania nowych uprawnieñ.';
+$EFC_Locale['Perm: admin bbcodes'] = 'ZarzÄ…dzanie tagami BBCodes.';
+$EFC_Locale['Perm: admin blacklist'] = 'DostÄ™p do czarnej listy.';
+$EFC_Locale['Perm: admin comments'] = 'DostÄ™p do zarzÄ…dzania komentarzami.';
+$EFC_Locale['Perm: admin logs'] = 'DostÄ™p do logÃ³w strony.';
+$EFC_Locale['Perm: admin urls'] = 'DostÄ™p do generatora linkÃ³w.';
+$EFC_Locale['Perm: admin news_cats'] = 'DostÄ™p do kategorii newsÃ³w.';
+$EFC_Locale['Perm: admin news'] = 'Dodawanie newsÃ³w z poziomu administratora.';
+$EFC_Locale['Perm: admin panels'] = 'DostÄ™p do zarzÄ…dzania panelami.';
+$EFC_Locale['Perm: admin permissions'] = 'MoÅ¼liwoÅ›Ä‡ dodawania nowych uprawnieÅ„.';
 $EFC_Locale['Perm: admin phpinfo'] = 'Informacje PHP serwera.';
-$EFC_Locale['Perm: admin groups'] = 'Dodawanie nowych grup u¿ytkownika.';
-$EFC_Locale['Perm: admin security'] = 'Polityka bezpieczeñstwa';
-$EFC_Locale['Perm: admin settings'] = 'Ustawienia g³ówne systemu.';
-$EFC_Locale['Perm: admin settings_banners'] = 'Zarz±dzanie banerami';
-$EFC_Locale['Perm: admin settings_cache'] = 'Pamiêæ podrêczna';
-$EFC_Locale['Perm: admin settings_time'] = 'Zarz±dzanie dat± i godzin±.';
-$EFC_Locale['Perm: admin settings_registration'] = 'Dostêp do ustawieñ rejestracji.';
-$EFC_Locale['Perm: admin settings_misc'] = 'Dostêp do ustawieñ ró¿nych.';
-$EFC_Locale['Perm: admin settings_users'] = 'Dostêp do ustawieñ u¿ytkowników.';
-$EFC_Locale['Perm: admin settings_ipp'] = 'Ilo¶æ elementów na stronie.';
-$EFC_Locale['Perm: admin settings_logs'] = 'Dostêp do ustawieñ logów admina.';
+$EFC_Locale['Perm: admin groups'] = 'Dodawanie nowych grup uÅ¼ytkownika.';
+$EFC_Locale['Perm: admin security'] = 'Polityka bezpieczeÅ„stwa';
+$EFC_Locale['Perm: admin settings'] = 'Ustawienia gÅ‚Ã³wne systemu.';
+$EFC_Locale['Perm: admin settings_banners'] = 'ZarzÄ…dzanie banerami';
+$EFC_Locale['Perm: admin settings_cache'] = 'PamiÄ™Ä‡ podrÄ™czna';
+$EFC_Locale['Perm: admin settings_time'] = 'ZarzÄ…dzanie datÄ… i godzinÄ….';
+$EFC_Locale['Perm: admin settings_registration'] = 'DostÄ™p do ustawieÅ„ rejestracji.';
+$EFC_Locale['Perm: admin settings_misc'] = 'DostÄ™p do ustawieÅ„ rÃ³Å¼nych.';
+$EFC_Locale['Perm: admin settings_users'] = 'DostÄ™p do ustawieÅ„ uÅ¼ytkownikÃ³w.';
+$EFC_Locale['Perm: admin settings_ipp'] = 'IloÅ›Ä‡ elementÃ³w na stronie.';
+$EFC_Locale['Perm: admin settings_logs'] = 'DostÄ™p do ustawieÅ„ logÃ³w admina.';
 $EFC_Locale['Perm: admin navigations'] = 'Nawigacja strony';
-$EFC_Locale['Perm: admin smileys'] = 'Dostêp do emotikon na stronie';
-$EFC_Locale['Perm: admin submissions'] = 'Dostêp do nades³anych materia³ów';
-$EFC_Locale['Perm: admin upgrade'] = 'Mo¿liwo¶æ aktualizowania systemu.';
-$EFC_Locale['Perm: admin user_fields'] = 'Mo¿liwo¶æ dodawania nowych pól u¿ytkownika.';
-$EFC_Locale['Perm: admin user_fields_cats'] = 'Mo¿liwo¶æ dodawania kategorii pól u¿ytkownika.';
-$EFC_Locale['Perm: admin users'] = 'Mo¿liwo¶æ zarz±dzania kontami u¿ytkowników.';
+$EFC_Locale['Perm: admin smileys'] = 'DostÄ™p do emotikon na stronie';
+$EFC_Locale['Perm: admin submissions'] = 'DostÄ™p do nadesÅ‚anych materiaÅ‚Ã³w';
+$EFC_Locale['Perm: admin upgrade'] = 'MoÅ¼liwoÅ›Ä‡ aktualizowania systemu.';
+$EFC_Locale['Perm: admin user_fields'] = 'MoÅ¼liwoÅ›Ä‡ dodawania nowych pÃ³l uÅ¼ytkownika.';
+$EFC_Locale['Perm: admin user_fields_cats'] = 'MoÅ¼liwoÅ›Ä‡ dodawania kategorii pÃ³l uÅ¼ytkownika.';
+$EFC_Locale['Perm: admin users'] = 'MoÅ¼liwoÅ›Ä‡ zarzÄ…dzania kontami uÅ¼ytkownikÃ³w.';
 $EFC_Locale['Perm: user login'] = 'Logowanie do serwisu.';
 $EFC_Locale['Perm: comment'] = 'Zamieszczenie komentarzy';
-$EFC_Locale['Perm: comment edit'] = 'Modyfikowanie w³asnego komentarza w okre¶lonym przedziale czasowym od jego dodania.';
-$EFC_Locale['Perm: comment edit all'] = 'Modyfikowanie komentarzy swoich oraz innych u¿ytkowników';
-$EFC_Locale['Perm: comment delete'] = 'Usuwanie w³asnego komentarza w okre¶lonym przedziale czasowym od jego dodania.';
-$EFC_Locale['Perm: comment delete all'] = 'Usuwanie komentarzy swoich oraz innych u¿ytkowników';
-$EFC_Locale['Group: admin'] = 'Administratorzy s± to ludzie, którzy ca³y czas czuwaj± nad stron±.';
-$EFC_Locale['Group: user'] = 'Uprawnienie to posiada podstawowe zezwolenia m.in. Mo¿liwo¶æ logowania siê.';
-$EFC_Locale['Group: guest'] = 'Osoba odwiedzaj±ca stronê bez logowania siê.';
+$EFC_Locale['Perm: comment edit'] = 'Modyfikowanie wÅ‚asnego komentarza w okreÅ›lonym przedziale czasowym od jego dodania.';
+$EFC_Locale['Perm: comment edit all'] = 'Modyfikowanie komentarzy swoich oraz innych uÅ¼ytkownikÃ³w';
+$EFC_Locale['Perm: comment delete'] = 'Usuwanie wÅ‚asnego komentarza w okreÅ›lonym przedziale czasowym od jego dodania.';
+$EFC_Locale['Perm: comment delete all'] = 'Usuwanie komentarzy swoich oraz innych uÅ¼ytkownikÃ³w';
+$EFC_Locale['Group: admin'] = 'Administratorzy sÄ… to ludzie, ktÃ³rzy caÅ‚y czas czuwajÄ… nad stronÄ….';
+$EFC_Locale['Group: user'] = 'Uprawnienie to posiada podstawowe zezwolenia m.in. MoÅ¼liwoÅ›Ä‡ logowania siÄ™.';
+$EFC_Locale['Group: guest'] = 'Osoba odwiedzajÄ…ca stronÄ™ bez logowania siÄ™.';
 
 //Navigation Links
-$EFC_Locale['Home'] = 'Strona g³ówna';
-$EFC_Locale['News Cats'] = 'Kategorie newsów';
-$EFC_Locale['Users'] = 'U¿ytkownicy';
+$EFC_Locale['Home'] = 'Strona gÅ‚Ã³wna';
+$EFC_Locale['News Cats'] = 'Kategorie newsÃ³w';
+$EFC_Locale['Users'] = 'UÅ¼ytkownicy';
 $EFC_Locale['Contact'] = 'Kontakt';
 $EFC_Locale['Search'] = 'Szukaj';
 $EFC_Locale['Rules'] = 'Regulamin';
-$EFC_Locale['Tags'] = 'S³owa kluczowe';
+$EFC_Locale['Tags'] = 'SÅ‚owa kluczowe';
 $EFC_Locale['Team'] = 'Administracja';
-$EFC_Locale['Pages'] = 'Materia³y i wpisy';
+$EFC_Locale['Pages'] = 'MateriaÅ‚y i wpisy';
 
 // Pages
 $EFC_Locale['No category'] = 'Bez kategorii';
-$EFC_Locale['No category desc'] = 'Kategoria dla materia³ów nieprzypisanych do ¿adnej kategorii';
+$EFC_Locale['No category desc'] = 'Kategoria dla materiaÅ‚Ã³w nieprzypisanych do Å¼adnej kategorii';
 
 // Groups
 $EFC_Locale['Admin'] = 'Administrator';
-$EFC_Locale['User'] = 'U¿ytkownik';
-$EFC_Locale['Guest'] = 'Go¶æ';
+$EFC_Locale['User'] = 'UÅ¼ytkownik';
+$EFC_Locale['Guest'] = 'GoÅ›Ä‡';
 
-$EFC_Locale['Group: admin'] = 'Administratorzy s± to ludzie, którzy ca³y czas czuwaj± nad stron±.';
-$EFC_Locale['Group: user'] = 'Uprawnienie to posiada podstawowe zezwolenia m.in. Mo¿liwo¶æ logowania siê.';
-$EFC_Locale['Group: guest'] = 'Osoba odwiedzaj±ca stronê bez logowania siê.';
+$EFC_Locale['Group: admin'] = 'Administratorzy sÄ… to ludzie, ktÃ³rzy caÅ‚y czas czuwajÄ… nad stronÄ….';
+$EFC_Locale['Group: user'] = 'Uprawnienie to posiada podstawowe zezwolenia m.in. MoÅ¼liwoÅ›Ä‡ logowania siÄ™.';
+$EFC_Locale['Group: guest'] = 'Osoba odwiedzajÄ…ca stronÄ™ bez logowania siÄ™.';
 ?>

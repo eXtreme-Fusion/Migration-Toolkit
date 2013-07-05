@@ -1458,6 +1458,8 @@ class Converter
 	{
 		$db_connect = @mysql_connect($this->_db_host, $this->_db_user, $this->_db_pass);
 		$db_select = @mysql_select_db($this->_db_name);
+		@mysql_query("SET NAMES 'utf8'");
+		@mysql_query("SET CHARSET 'utf8'");
 		if ( ! $db_connect) 
 		{
 			die("<div style='font-family:Verdana;font-size:11px;text-align:center;'><b>Unable to establish connection to MySQL</b><br>".mysql_errno()." : ".mysql_error()."</div>");
