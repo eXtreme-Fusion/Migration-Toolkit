@@ -106,7 +106,7 @@ class Converter
 			$this->createPagesCategories() ?		$data[] = array('name' => 'pages_categories',		'status' => TRUE) : $data[] = array('name' => 'pages_categories',		'status' => FALSE);
 			$this->createPagesCustomSettings() ?	$data[] = array('name' => 'pages_custom_settings',	'status' => TRUE) : $data[] = array('name' => 'pages_custom_settings',	'status' => FALSE);
 			$this->createTimeFormats() ?			$data[] = array('name' => 'time_formats',			'status' => TRUE) : $data[] = array('name' => 'time_formats',			'status' => FALSE);
-
+		}
 		elseif($num === 2)
 		{
 			// Tworzenie ustawień
@@ -919,21 +919,21 @@ class Converter
 		
 		if ($query)
 		{
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'bugs.png' WHERE `image` = 'bugs.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'downloads.png' WHERE `image` = 'downloads.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'eXtreme-fusion.png' WHERE `image` = 'eXtreme-fusion.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'games.png' WHERE `image` = 'games.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'graphics.png' WHERE `image` = 'graphics.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'hardware.png' WHERE `image` = 'hardware.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'journal.png' WHERE `image` = 'journal.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'users.png' WHERE `image` = 'users.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'mods.png' WHERE `image` = 'mods.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'movies.png' WHERE `image` = 'movies.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'network.png' WHERE `image` = 'network.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'news.png' WHERE `image` = 'news.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'security.png' WHERE `image` = 'security.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'software.png' WHERE `image` = 'software.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'themes.png' WHERE `image` = 'themes.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'bugs.png' WHERE `image` = 'bugs.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'downloads.png' WHERE `image` = 'downloads.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'eXtreme-fusion.png' WHERE `image` = 'eXtreme-fusion.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'games.png' WHERE `image` = 'games.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'graphics.png' WHERE `image` = 'graphics.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'hardware.png' WHERE `image` = 'hardware.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'journal.png' WHERE `image` = 'journal.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'users.png' WHERE `image` = 'users.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'mods.png' WHERE `image` = 'mods.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'movies.png' WHERE `image` = 'movies.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'network.png' WHERE `image` = 'network.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'news.png' WHERE `image` = 'news.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'security.png' WHERE `image` = 'security.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'software.png' WHERE `image` = 'software.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'themes.png' WHERE `image` = 'themes.gif'");
 		}
 		
 		return $query;
@@ -1091,26 +1091,27 @@ class Converter
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
 		
-		// Pobranie wszystkich administratorów w celu uzupełnienie ich uprawnień z eXtreme-Fusion
+
 		// Główny administrator powinien zadbać o skontrolowanie każdego z administratorów w celu korekt.
-		$q = $this->dbQuery("SELECT `id` FROM `".$this->_db_prefix."users` WHERE `user_level` = '103'"); $i = 0;
-		while ($data = $this->dbArray($q)) 
-		{			
-			// Aktualizacja uprawnień, dodanie nowych z eXtreme-Fusion
-			$this->dbQuery("UPDATE `".$this->_db_prefix."users` 
-				SET `roles` = 'a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}', `role` = '1'
-				WHERE `id` = '".$data['id']."'
-			");
-			$i++;
-		}
+		// Minowanie administratorów o levelu 103 do rangi administratora
+		$query_2 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` 
+			SET `roles` = 'a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}', `role` = '1'
+			WHERE `user_level` = '103'
+		");
+
+		// Odwołanie administratorów drugiego rzędu do rangi użytkownika, oraz nadanie zwykłym użytkownikom uprawnień użytkownika
+		$query_3 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` 
+			SET `roles` = '".serialize(array(2 => '0', 0 => '2', 1 => '3'))."', `role` = '2'
+			WHERE `user_level` = '101' OR `user_level` = '102'
+		");
 		
-		$query_2 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."users` DROP `user_level`");
+		$query_4 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."users` DROP `user_level`");
 		
-		$query_3 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `role` = '2' WHERE `role` = ''");
+		$query_5 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `role` = '2' WHERE `role` = ''");
 		
-		$query_4 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `lang` = 'Polish' WHERE `lang` = ''");
+		$query_6 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `lang` = 'Polish' WHERE `lang` = ''");
 		
-		return ($query_1 && $query_2 && $query_3 && ($i ==! 0 ? TRUE : FALSE) ? TRUE : FALSE);	
+		return ($query_1 && $query_2 && $query_3 && $query_4 && $query_5 && $query_6 ? TRUE : FALSE);	
 	}	
 	
 	/*
