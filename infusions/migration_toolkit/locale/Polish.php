@@ -16,7 +16,7 @@
 | 
 **********************************************************/
 
-$locale['EFC_name'] = "Konwerter bazy eXtreme-Fusion 4.17 -> eXtreme-Fusion 5.0.3";
+$locale['EFC_name'] = "Migration Toolkit";
 $locale['EFC_desc'] = "Narzêdzie s³u¿±ce do odpowiedniej zmiany struktury bazy eXtreme-Fusion 4.17 do dzia³ania z eXtreme-Fusion 5.0.3";
 
 // Panels

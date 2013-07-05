@@ -204,8 +204,8 @@ class Converter
 	*/
 	private function createAdmin() 
 	{
-		$this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."admin");
-		$query = $this->dbQuery("CREATE TABLE ".$this->_db_prefix."admin (
+		$this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."admin`");
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."admin` (
 			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			`permissions` VARCHAR(127) NOT NULL DEFAULT '',
 			`image` VARCHAR(120) NOT NULL DEFAULT '',
@@ -217,7 +217,7 @@ class Converter
 
 		if ($query)
 		{
-			$this->dbQuery("INSERT INTO ".$this->_db_prefix."admin (`permissions`, `image`, `title`, `link`, `page`) VALUES
+			$this->dbQuery("INSERT INTO `".$this->_db_prefix."admin` (`permissions`, `image`, `title`, `link`, `page`) VALUES
 				('admin.bbcodes', 'bbcodes.png', 'BBCodes', 'bbcodes.php', 3),
 				('admin.blacklist', 'blacklist.png', 'Blacklist', 'blacklist.php', 2),
 				('admin.comments', 'comments.png', 'Comments', 'comments.php', 2),
@@ -258,7 +258,7 @@ class Converter
 	*/
 	private function createBBcode() 
 	{
-		$query = $this->dbQuery("CREATE TABLE ".$this->_db_prefix."bbcodes (
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."bbcodes` (
 			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			`name` VARCHAR(20) NOT NULL DEFAULT '',
 			`order` SMALLINT UNSIGNED NOT NULL,
@@ -268,7 +268,7 @@ class Converter
 		
 		if ($query)
 		{
-			$query = $this->dbQuery("INSERT INTO ".$this->_db_prefix."bbcodes (`name`, `order`) VALUES 
+			$query = $this->dbQuery("INSERT INTO `".$this->_db_prefix."bbcodes` (`name`, `order`) VALUES 
 				('b', '1'),
 				('i', '2'),
 				('u', '3'),
@@ -291,7 +291,7 @@ class Converter
 	*/
 	private function createUserFields() 
 	{
-		$query = $this->dbQuery("CREATE TABLE ".$this->_db_prefix."user_fields (
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."user_fields` (
 			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			`name` VARCHAR(50) NOT NULL,
 			`index` VARCHAR(50) NOT NULL,
@@ -306,7 +306,7 @@ class Converter
 		
 		if ($query)
 		{
-			$query = $this->dbQuery("INSERT INTO ".$this->_db_prefix."user_fields (`name`, `index`, `cat`, `type`, `option`) VALUES 
+			$query = $this->dbQuery("INSERT INTO `".$this->_db_prefix."user_fields` (`name`, `index`, `cat`, `type`, `option`) VALUES 
 				('".$this->_lang['First name']."', 'name', 1, 1, ''),
 				('".$this->_lang['Date of birth']."', 'old', 1, 1, ''),
 				('".$this->_lang['Gadu-Gadu']."', 'gg', 2, 1, ''),
@@ -325,7 +325,7 @@ class Converter
 	*/
 	private function createUserFieldCats() 
 	{
-		$query = $this->dbQuery("CREATE TABLE ".$this->_db_prefix."user_field_cats (
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."user_field_cats` (
 			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			`name` VARCHAR(200) NOT NULL,
 			`order` SMALLINT UNSIGNED NOT NULL,
@@ -334,7 +334,7 @@ class Converter
 		
 		if ($query)
 		{
-			$query = $this->dbQuery("INSERT INTO ".$this->_db_prefix."user_field_cats (`name`, `order`) VALUES 
+			$query = $this->dbQuery("INSERT INTO `".$this->_db_prefix."user_field_cats` (`name`, `order`) VALUES 
 				('".$this->_lang['Information']."', 1),
 				('".$this->_lang['Contact Information']."', 2),
 				('".$this->_lang['Miscellaneous']."', 3)
@@ -349,46 +349,46 @@ class Converter
 	*/
 	private function dropOldTables() 
 	{
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."articles");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."article_cats");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."captcha");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."custom_pages");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."downloads");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."download_cats");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."faqs");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."faq_cats");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."forums");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."forum_attachments");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."flood_control");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."infusions");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."messages_options");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."new_users");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."photos");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."photo_albums");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."poll_votes");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."polls");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."posts");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."ratings");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."submissions");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."vcode");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."buttons");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."cautions");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."cautions_config");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."colors"); 
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."panels_article");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."panels_download");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."panels_forum");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."rss_builder");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."site_links");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."site_links_groups");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."threads");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."thread_notify");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."user_groups");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."eps_points");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."eps_rangs");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."forumrang");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."weblinks");
-		$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."weblink_cats");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."articles`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."article_cats`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."captcha`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."custom_pages`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."downloads`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."download_cats`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."faqs`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."faq_cats`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."forums`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."forum_attachments`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."flood_control`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."infusions`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."messages_options`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."new_users`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."photos`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."photo_albums`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."poll_votes`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."polls`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."posts`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."ratings`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."submissions`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."vcode`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."buttons`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."cautions`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."cautions_config`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."colors`"); 
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."panels_article`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."panels_download`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."panels_forum`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."rss_builder`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."site_links`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."site_links_groups`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."threads`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."thread_notify`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."user_groups`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."eps_points`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."eps_rangs`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."forumrang`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."weblinks`");
+		$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."weblink_cats`");
 
 		return $query;
 	}
@@ -398,7 +398,7 @@ class Converter
 	*/
 	private function changeBlacklistFields() 
 	{
-		$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."blacklist
+		$query_1 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."blacklist`
 			CHANGE `blacklist_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT, 
 			CHANGE `blacklist_ip` `ip` VARCHAR(45) NOT NULL DEFAULT '',
 			CHANGE `blacklist_email` `email` VARCHAR(100) NOT NULL DEFAULT '',
@@ -410,7 +410,11 @@ class Converter
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
 		
-		return $query;
+		$query_2 = $this->dbQuery("UPDATE `".$this->_db_prefix."blacklist` SET `user_id` = '1' WHERE `user_id` = '0'");
+		
+		$query_3 = $this->dbQuery("UPDATE `".$this->_db_prefix."blacklist` SET `datestamp` = '".time()."' WHERE `datestamp` = '0'");
+		
+		return ($query_1 && $query_2 && $query_3 ? TRUE : FALSE);
 	}
 	
 	/*
@@ -418,7 +422,7 @@ class Converter
 	*/
 	private function changeCommentsFields() 
 	{
-		$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."comments
+		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."comments`
 			DROP `comment_smileys`,
 			CHANGE `comment_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
 			CHANGE `comment_item_id` `content_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
@@ -431,7 +435,38 @@ class Converter
 			ADD INDEX `datestamp` (`datestamp`), 
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
-		
+	
+		$q = $this->dbQuery("SELECT `id`, `author`, `content_type` FROM `".$this->_db_prefix."comments`"); $i = 0;
+		while ($data = $this->dbArray($q)) 
+		{
+			if ($data['content_type'] === 'N')
+			{
+				$this->dbQuery("UPDATE `".$this->_db_prefix."comments` 
+					SET `content_type` = 'news'
+					WHERE `id` = '".$data['id']."'
+				");
+			}
+			else
+			{
+				$this->dbQuery("DELETE FROM `".$this->_db_prefix."comments` WHERE `id` = '".$data['id']."'");
+			}
+			if (is_numeric($data['author']))
+			{
+				$this->dbQuery("UPDATE `".$this->_db_prefix."comments` 
+					SET `author_type` = 'u'
+					WHERE `id` = '".$data['id']."'
+				");
+			}
+			else
+			{
+				$this->dbQuery("UPDATE `".$this->_db_prefix."comments` 
+					SET `author_type` = 'g'
+					WHERE `id` = '".$data['id']."'
+				");
+			}
+			$i++;
+		}
+	
 		return $query;
 	}
 		
@@ -441,7 +476,7 @@ class Converter
 	private function changeMessagesFields() 
 	{
 		
-		$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."messages
+		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."messages`
 			CHANGE `message_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			CHANGE `message_to` `to` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 			CHANGE `message_from` `from` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
@@ -465,7 +500,7 @@ class Converter
 	private function changeNewsFields() 
 	{
 		
-		$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."news 
+		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."news` 
 			DROP `news_rss`,
 			DROP `news_name`,
 			DROP `news_start`,
@@ -502,7 +537,7 @@ class Converter
 	*/
 	private function changeNewsCatsFields() 
 	{
-		$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."news_cats
+		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."news_cats`
 			CHANGE `news_cat_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			CHANGE `news_cat_name` `name` VARCHAR(100) NOT NULL DEFAULT '',
 			CHANGE `news_cat_image` `image` VARCHAR(100) NOT NULL DEFAULT '',
@@ -518,11 +553,11 @@ class Converter
 	*/
 	private function changeOnlineFields() 
 	{
-		$query = $this->dbQuery("RENAME TABLE ".$this->_db_prefix."online TO ".$this->_db_prefix."statistics");
+		$query = $this->dbQuery("RENAME TABLE `".$this->_db_prefix."online` TO `".$this->_db_prefix."statistics`");
 		
 		if($query)
 		{
-			$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."statistics
+			$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."statistics`
 				DROP `online_lastactive`,
 				CHANGE `online_user` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 				CHANGE `online_ip` `ip` VARCHAR(45) NOT NULL DEFAULT '0.0.0.0',		
@@ -540,7 +575,7 @@ class Converter
 	*/
 	private function changePanelsFields() 
 	{
-		$query_1 = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."panels
+		$query_1 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."panels`
 			CHANGE `panel_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			CHANGE `panel_name` `name` VARCHAR(100) NOT NULL DEFAULT '',
 			CHANGE `panel_filename` `filename` VARCHAR(100) NOT NULL DEFAULT '',
@@ -555,16 +590,16 @@ class Converter
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
 		
-		$query_2 = $this->dbQuery("TRUNCATE ".$this->_db_prefix."panels");
+		$query_2 = $this->dbQuery("TRUNCATE `".$this->_db_prefix."panels`");
 		
-		$query_3 = $this->dbQuery("INSERT INTO ".$this->_db_prefix."panels (`name`, `filename`, `content`, `side`, `order`, `type`, `access`, `display`, `status`) VALUES 
+		$query_3 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."panels` (`name`, `filename`, `content`, `side`, `order`, `type`, `access`, `display`, `status`) VALUES 
 			('".$this->_lang['Navigation']."', 'navigation_panel', '', '1', '1', 'file', '3', '0', '1'),
 			('".$this->_lang['Online Users']."', 'online_users_panel', '', '1', '2', 'file', '3', '0', '1'),
 			('".$this->_lang['Welcome Message']."', 'welcome_message_panel', '', '2', '1', 'file', '3', '0', '0'),
 			('".$this->_lang['User Panel']."', 'user_info_panel', '', '4', 1, 'file', '3', '0', '1')
 		");
 		
-		$query_4 = $this->dbQuery("UPDATE ".$this->_db_prefix."panels SET status='1' WHERE filename='navigation_panel'");
+		$query_4 = $this->dbQuery("UPDATE `".$this->_db_prefix."panels` SET status='1' WHERE filename='navigation_panel'");
 
 		return ($query_1 && $query_2 && $query_3 && $query_4 ? TRUE : FALSE);
 	}
@@ -574,7 +609,7 @@ class Converter
 	*/
 	private function changeSmileysFields() 
 	{
-		$query_1 = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."smileys
+		$query_1 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."smileys`
 			CHANGE `smiley_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			CHANGE `smiley_code` `code` VARCHAR(50) NOT NULL,
 			CHANGE `smiley_image` `image` VARCHAR(100) NOT NULL,
@@ -582,9 +617,9 @@ class Converter
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
 		
-		$query_2 = $this->dbQuery("TRUNCATE ".$this->_db_prefix."smileys");
+		$query_2 = $this->dbQuery("TRUNCATE `".$this->_db_prefix."smileys`");
 		
-		$query_3 = $this->dbQuery("INSERT INTO ".$this->_db_prefix."smileys (`code`, `image`, `text`) VALUES 
+		$query_3 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."smileys` (`code`, `image`, `text`) VALUES 
 			(':)', 'smile.png', 'Smile'),
 			(';)', 'wink.png', 'Wink'),
 			(':(', 'sad.png', 'Sad'),
@@ -610,7 +645,7 @@ class Converter
 	*/
 	private function changeUsersFields() 
 	{
-		$query_1 = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."users
+		$query_1 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."users`
 			CHANGE `user_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			CHANGE `user_name` `username` VARCHAR(30) NOT NULL DEFAULT '',
 			CHANGE `user_password` `password` CHAR(129) NOT NULL DEFAULT '',
@@ -667,22 +702,22 @@ class Converter
 		
 		// Pobranie wszystkich administratorów w celu uzupełnienie ich uprawnień z eXtreme-Fusion
 		// Główny administrator powinien zadbać o skontrolowanie każdego z administratorów w celu korekt.
-		$q = $this->dbQuery("SELECT `id` FROM ".$this->_db_prefix."users WHERE `user_level` = '103'"); $i = 0;
+		$q = $this->dbQuery("SELECT `id` FROM `".$this->_db_prefix."users` WHERE `user_level` = '103'"); $i = 0;
 		while ($data = $this->dbArray($q)) 
 		{			
 			// Aktualizacja uprawnień, dodanie nowych z eXtreme-Fusion
-			$this->dbQuery("UPDATE ".$this->_db_prefix."users 
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` 
 				SET `roles` = 'a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}', `role` = '1'
 				WHERE `id` = '".$data['id']."'
 			");
 			$i++;
 		}
 		
-		$query_2 = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."users DROP `user_level`");
+		$query_2 = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."users` DROP `user_level`");
 		
-		$query_3 = $this->dbQuery("UPDATE ".$this->_db_prefix."users SET `role` = '2' WHERE `role` = ''");
+		$query_3 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `role` = '2' WHERE `role` = ''");
 		
-		$query_4 = $this->dbQuery("UPDATE ".$this->_db_prefix."users SET `lang` = 'Polish' WHERE `lang` = ''");
+		$query_4 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `lang` = 'Polish' WHERE `lang` = ''");
 		
 		return ($query_1 && $query_2 && $query_3 && ($i ==! 0 ? TRUE : FALSE) ? TRUE : FALSE);	
 	}	
@@ -701,11 +736,11 @@ class Converter
 		$url = parse_url($siteurl);
 		
 		// Pobranie aktualnego regulaminu
-		$rules = $this->dbArray($this->dbQuery("SELECT `code` FROM ".$this->_db_prefix."rules"));
+		$rules = $this->dbArray($this->dbQuery("SELECT `code` FROM `".$this->_db_prefix."rules`"));
 		
 		// Usunięcia, dodanie i modyfikacja tabel
 		// Przygotowanie przed konwersją tabeli z ustawieniami
-		$query = $this->dbQuery("ALTER TABLE ".$this->_db_prefix."settings
+		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."settings`
 			DROP `news_style`,
 			DROP `validation_method`,
 			DROP `numofshouts`,
@@ -809,8 +844,8 @@ class Converter
 		if ($query)
 		{
 			// Stworzenie tabeli tymczasowej na potrzeby zapisania starych danych
-			$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."settings_tmp");
-			$query = $this->dbQuery("CREATE TABLE ".$this->_db_prefix."settings_tmp 
+			$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."settings_tmp`");
+			$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."settings_tmp`
 				(
 					`key` VARCHAR(100) NOT NULL DEFAULT '',
 					`value` text NOT NULL,
@@ -819,24 +854,24 @@ class Converter
 			");
 			
 			// Pobranie aktualnych już zmodyfikowanych danych
-			$settings = $this->dbArray($this->dbQuery("SELECT * FROM ".$this->_db_prefix."settings"));
+			$settings = $this->dbArray($this->dbQuery("SELECT * FROM `".$this->_db_prefix."settings`"));
 
 			// Umieszczenie nowych danych w tabeli tymczasowej ustawień
 			foreach ($settings as $key => $value) 
 			{
-				$query = $this->dbQuery("INSERT INTO ".$this->_db_prefix."settings_tmp 
+				$query = $this->dbQuery("INSERT INTO `".$this->_db_prefix."settings_tmp`
 					(`key`, `value`) VALUES ('$key', '$value')
 				");
 			}
 			
 			// Usunięcie starej tabeli z ustawieniami
-			$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."settings");
+			$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."settings`");
 			
 			// Usunięcie tabeli z regulaminem strony
-			$query = $this->dbQuery("DROP TABLE IF EXISTS ".$this->_db_prefix."rules");
+			$query = $this->dbQuery("DROP TABLE IF EXISTS `".$this->_db_prefix."rules`");
 			
 			// Zmiana nazwy tabeli tymczasowej na użyteczną dla systemu
-			$query = $this->dbQuery("RENAME TABLE ".$this->_db_prefix."settings_tmp TO ".$this->_db_prefix."settings");
+			$query = $this->dbQuery("RENAME TABLE `".$this->_db_prefix."settings_tmp` TO `".$this->_db_prefix."settings`");
 			
 			// Jeśli operacja wykonała się pomyślnie dodaj wymagane dane do ustawień
 			if ($query)
@@ -857,6 +892,71 @@ class Converter
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'cookie_secure'");
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".$_SERVER['HTTP_HOST']."' WHERE `key` = 'cookie_domain'");
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '/' WHERE `key` = 'cookie_patch'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".time()."' WHERE `key` = 'cronjob_day'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".time()."' WHERE `key` = 'cronjob_hour'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".time()."' WHERE `key` = 'cronjob_templates_clean'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".$rules['code']."' WHERE `key` = 'license_agreement'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".time()."' WHERE `key` = 'license_lastupdate'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1' WHERE `key` = 'logger_active'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1' WHERE `key` = 'logger_optimize_active'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '50' WHERE `key` = 'logger_expire_days'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '50' WHERE `key` = 'logger_save_removal_action'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'cache_active'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '86400' WHERE `key` = 'cache_expire'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'bad_words_enabled'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '' WHERE `key` = 'bad_words'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '******' WHERE `key` = 'bad_word_replace'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = 'Europe/London' WHERE `key` = 'timezone'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1.0' WHERE `key` = 'offset_timezone'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'user_custom_offset_timezone'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'enable_deactivation'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = 'sessions' WHERE `key` = 'login_method'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'enable_terms'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1' WHERE `key` = 'visits_counter_enabled'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".serialize(array('register' => '0'))."' WHERE `key` = 'validation'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'hide_userprofiles'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1' WHERE `key` = 'userthemes'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'deactivation_action'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'change_name'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1' WHERE `key` = 'maintenance_level'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '1' WHERE `key` = 'maintenance_form'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = 'all' WHERE `key` = 'default_search'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '365' WHERE `key` = 'deactivation_period'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '14' WHERE `key` = 'deactivation_response'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '10' WHERE `key` = 'news_cats_item_per_page'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '11' WHERE `key` = 'news_per_page'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '4' WHERE `key` = 'notes_per_page'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '10' WHERE `key` = 'users_per_page'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '11' WHERE `key` = 'comments_per_page'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".$this->_new_ef_version."' WHERE `key` = 'version'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".serialize(array(
+						'site_normal_loging_time' => 60*60*5,			// 5h
+						'site_remember_loging_time' => 60*60*24*21,		// 21 days
+						'admin_loging_time' => 60*30,					// 30min
+						'user_active_time' => 60*5						// 5min
+					)
+				)."' WHERE `key` = 'loging'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".serialize(array(
+						'param_sep' => '/',
+						'main_sep' => '/',
+						'url_ext' => '.html',
+						'tpl_ext' => '.tpl',
+						'logic_ext' => '.php',
+						'ext_allowed' => '1'
+					)
+				)."' WHERE `key` = 'routing'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".serialize(array(
+					//'expire_contact' => '3600',
+					'expire_news' => '3600',
+					'expire_news_cats' => '3600',
+					'expire_pages' => '3600',
+					'expire_profile' => '3600',
+					//'expire_rules' => '3600',
+					'expire_tags' => '3600',
+					'expire_team' => '3600',
+					'expire_users' => '3600'
+					)
+				)."' WHERE `key` = 'cache'");
 			}
 		}
 		

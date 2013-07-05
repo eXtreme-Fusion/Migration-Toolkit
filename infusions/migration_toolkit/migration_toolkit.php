@@ -27,16 +27,16 @@ else
 
 $aid = (isset($_GET['aid']) ? $_GET['aid'] : '');
 
-if (file_exists('../../infusions/converter_extreme_fusion/locale/'.(isset($_COOKIE['efc_lang']) ? $_COOKIE['efc_lang'] : $settings['locale']).'.php')) 
+if (file_exists('../../infusions/migration_toolkit/locale/'.(isset($_COOKIE['efc_lang']) ? $_COOKIE['efc_lang'] : $settings['locale']).'.php')) 
 {
-	include '../../infusions/converter_extreme_fusion/locale/'.(isset($_COOKIE['efc_lang']) ? $_COOKIE['efc_lang'] : $settings['locale']).'.php';
+	include '../../infusions/migration_toolkit/locale/'.(isset($_COOKIE['efc_lang']) ? $_COOKIE['efc_lang'] : $settings['locale']).'.php';
 } 
 else
 {
-	include '../../infusions/converter_extreme_fusion/locale/English.php';
+	include '../../infusions/migration_toolkit/locale/English.php';
 }
 
-require_once '../../infusions/converter_extreme_fusion/class/class.Converter.php';
+require_once '../../infusions/migration_toolkit/class/class.Converter.php';
 
 $_EFC = New Converter($EFC_Locale, array($db_prefix, $db_host, $db_user, $db_pass, $db_name));
 
@@ -54,7 +54,7 @@ echo "<!DOCTYPE html>
 	<head>
 		<title>Konwerter systemu eXtreme-Fusion ".$_EFC->geteXtremeFusionVersion()." na system eXtreme-Fusion ".$_EFC->getNeweXtremeFusionVersion()."</title>
 		<meta charset='UTF-8'>
-		<link href='../../infusions/converter_extreme_fusion/stylesheet/main.css' media='screen' rel='stylesheet'>
+		<link href='../../infusions/migration_toolkit/stylesheet/main.css' media='screen' rel='stylesheet'>
 	</head>
 <body>
 ";
