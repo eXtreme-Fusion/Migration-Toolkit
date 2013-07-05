@@ -874,10 +874,8 @@ class Converter
 	{
 		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."news` 
 			DROP `news_rss`,
-			DROP `news_name`,
 			DROP `news_start`,
 			DROP `news_end`,
-			DROP `news_visibility`,
 			CHANGE `news_id` `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			CHANGE `news_subject` `title` VARCHAR(255) NOT NULL DEFAULT '',
 			CHANGE `news_cat` `category` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
@@ -890,8 +888,8 @@ class Converter
 			CHANGE `news_allow_comments` `allow_comments` TINYINT UNSIGNED NOT NULL DEFAULT '1',
 			CHANGE `news_allow_ratings` `allow_ratings` TINYINT UNSIGNED NOT NULL DEFAULT '1',
 			CHANGE `news_visibility` `access` VARCHAR(255) NOT NULL DEFAULT '' AFTER `datestamp`,
+			CHANGE `news_name` `author` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' AFTER `content_extended`,
 			ADD `draft` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `reads`,
-			ADD `author` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' AFTER `content_extended`,
 			ADD `language` VARCHAR(255) NOT NULL DEFAULT 'English' AFTER `category`,
 			ADD `link` VARCHAR(255) NOT NULL DEFAULT '' AFTER `title`,
 			ADD `source` TEXT NOT NULL AFTER `author`,
