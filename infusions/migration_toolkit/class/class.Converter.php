@@ -889,8 +889,8 @@ class Converter
 			CHANGE `news_sticky` `sticky` TINYINT UNSIGNED NOT NULL DEFAULT '0',
 			CHANGE `news_allow_comments` `allow_comments` TINYINT UNSIGNED NOT NULL DEFAULT '1',
 			CHANGE `news_allow_ratings` `allow_ratings` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			CHANGE `news_visibility` `access` VARCHAR(255) NOT NULL DEFAULT '' AFTER `datestamp`,
 			ADD `draft` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `reads`,
-			ADD `access` VARCHAR(255) NOT NULL DEFAULT '' AFTER `datestamp`,
 			ADD `author` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' AFTER `content_extended`,
 			ADD `language` VARCHAR(255) NOT NULL DEFAULT 'English' AFTER `category`,
 			ADD `link` VARCHAR(255) NOT NULL DEFAULT '' AFTER `title`,
@@ -900,6 +900,14 @@ class Converter
 			ADD INDEX `reads` (`reads`), 
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
+		
+		if ($query)
+		{
+			// Aktualizacja widoczności newsów dla podstawowych grup
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `access` = '3' WHERE `access` = '0'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `access` = '2' WHERE `access` = '101'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `access` = '1' WHERE `access` = '102' OR `access` = '103'");
+		}
 		
 		return $query;
 	}
@@ -921,6 +929,7 @@ class Converter
 		{
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'bugs.png' WHERE `image` = 'bugs.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'downloads.png' WHERE `image` = 'downloads.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'eXtreme-fusion.png', `name` = 'eXtreme-fusion' WHERE `image` = 'php-fusion.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'eXtreme-fusion.png' WHERE `image` = 'eXtreme-fusion.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'games.png' WHERE `image` = 'games.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'graphics.png' WHERE `image` = 'graphics.gif'");
