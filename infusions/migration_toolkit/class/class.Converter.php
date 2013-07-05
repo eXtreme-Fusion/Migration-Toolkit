@@ -86,42 +86,58 @@ class Converter
 		if($num === 1)
 		{
 			// Tworzenie nowych tabel lub usuwanie starych i tworzenie nowej struktury
-			$this->createAdmin() ? 				$data[] = array('name' => 'admin',					'status' => TRUE) : $data[] = array('name' => 'admin', 					'status' => FALSE);
-			$this->createBBcode() ? 			$data[] = array('name' => 'bbcode',					'status' => TRUE) : $data[] = array('name' => 'bbcode', 				'status' => FALSE);
-			$this->createUserFields() ? 		$data[] = array('name' => 'user_fields',			'status' => TRUE) : $data[] = array('name' => 'user_fields', 			'status' => FALSE);
-			$this->createUserFieldCats() ? 		$data[] = array('name' => 'user_field_cats',		'status' => TRUE) : $data[] = array('name' => 'user_field_cats',		'status' => FALSE);
-		}
+			$this->createAdmin() ? 					$data[] = array('name' => 'admin',					'status' => TRUE) : $data[] = array('name' => 'admin', 					'status' => FALSE);
+			$this->createBBcode() ? 				$data[] = array('name' => 'bbcode',					'status' => TRUE) : $data[] = array('name' => 'bbcode', 				'status' => FALSE);
+			$this->createUserFields() ? 			$data[] = array('name' => 'user_fields',			'status' => TRUE) : $data[] = array('name' => 'user_fields', 			'status' => FALSE);
+			$this->createUserFieldCats() ? 			$data[] = array('name' => 'user_field_cats',		'status' => TRUE) : $data[] = array('name' => 'user_field_cats',		'status' => FALSE);
+			$this->createUsersOnline() ? 			$data[] = array('name' => 'users_online',			'status' => TRUE) : $data[] = array('name' => 'users_online',			'status' => FALSE);
+			$this->createUsersData() ? 				$data[] = array('name' => 'users_data',				'status' => TRUE) : $data[] = array('name' => 'users_data',				'status' => FALSE);
+			$this->createNavigation() ? 			$data[] = array('name' => 'navigation',				'status' => TRUE) : $data[] = array('name' => 'navigation',				'status' => FALSE);
+			$this->createGroups() ? 				$data[] = array('name' => 'groups',					'status' => TRUE) : $data[] = array('name' => 'groups',					'status' => FALSE);
+			$this->createPermissionsSections() ?	$data[] = array('name' => 'permissions_sections',	'status' => TRUE) : $data[] = array('name' => 'permissions_sections',	'status' => FALSE);
+			$this->createPermissions() ?			$data[] = array('name' => 'permissions',			'status' => TRUE) : $data[] = array('name' => 'permissions',			'status' => FALSE);
+			$this->createNotes() ?					$data[] = array('name' => 'notes',					'status' => TRUE) : $data[] = array('name' => 'notes',					'status' => FALSE);
+			$this->createLogs() ?					$data[] = array('name' => 'logs',					'status' => TRUE) : $data[] = array('name' => 'logs',					'status' => FALSE);
+			$this->createLinks() ?					$data[] = array('name' => 'links',					'status' => TRUE) : $data[] = array('name' => 'links',					'status' => FALSE);
+			$this->createModules() ?				$data[] = array('name' => 'modules',				'status' => TRUE) : $data[] = array('name' => 'modules',				'status' => FALSE);
+			$this->createTags() ?					$data[] = array('name' => 'tags',					'status' => TRUE) : $data[] = array('name' => 'tags',					'status' => FALSE);
+			$this->createPages() ?					$data[] = array('name' => 'pages',					'status' => TRUE) : $data[] = array('name' => 'pages',					'status' => FALSE);
+			$this->createPagesTypes() ?				$data[] = array('name' => 'pages_types',			'status' => TRUE) : $data[] = array('name' => 'pages_types',			'status' => FALSE);
+			$this->createPagesCategories() ?		$data[] = array('name' => 'pages_categories',		'status' => TRUE) : $data[] = array('name' => 'pages_categories',		'status' => FALSE);
+			$this->createPagesCustomSettings() ?	$data[] = array('name' => 'pages_custom_settings',	'status' => TRUE) : $data[] = array('name' => 'pages_custom_settings',	'status' => FALSE);
+			$this->createTimeFormats() ?			$data[] = array('name' => 'time_formats',			'status' => TRUE) : $data[] = array('name' => 'time_formats',			'status' => FALSE);
+
 		elseif($num === 2)
 		{
 			// Tworzenie ustawień
-			$this->createSettings()  ? 			$data[] = array('name' => 'settings',				'status' => TRUE) : $data[] = array('name' => 'settings', 				'status' => FALSE);
+			$this->createSettings()  ? 				$data[] = array('name' => 'settings',				'status' => TRUE) : $data[] = array('name' => 'settings', 				'status' => FALSE);
 		}
 		elseif($num === 3)
 		{
 			// Usuwanie nie potrzebnych tabel w nowym systemie
-			$this->dropOldTables() ? 			$data[] = array('name' => 'drop_old_tables',		'status' => TRUE) : $data[] = array('name' => 'drop_old_tables', 		'status' => FALSE);
+			$this->dropOldTables() ? 				$data[] = array('name' => 'drop_old_tables',		'status' => TRUE) : $data[] = array('name' => 'drop_old_tables', 		'status' => FALSE);
 		}
 		elseif($num === 4)
 		{
 			// Przetwarzanie istniejących tabel aby były zgodne z nowym systeme a dane nie zostały usunięte.
-			$this->changeBlacklistFields() ? 	$data[] = array('name' => 'blacklist',				'status' => TRUE) : $data[] = array('name' => 'blacklist', 				'status' => FALSE);
-			$this->changeCommentsFields() ? 	$data[] = array('name' => 'comments',				'status' => TRUE) : $data[] = array('name' => 'comments', 				'status' => FALSE);
-			$this->changeMessagesFields() ? 	$data[] = array('name' => 'messages',				'status' => TRUE) : $data[] = array('name' => 'messages', 				'status' => FALSE);
-			$this->changeNewsFields() ? 		$data[] = array('name' => 'news',					'status' => TRUE) : $data[] = array('name' => 'news', 					'status' => FALSE);
-			$this->changeNewsCatsFields() ? 	$data[] = array('name' => 'news_cats',				'status' => TRUE) : $data[] = array('name' => 'news_cats', 				'status' => FALSE);
-			$this->changeOnlineFields() ? 		$data[] = array('name' => 'online',					'status' => TRUE) : $data[] = array('name' => 'online', 				'status' => FALSE);
-			$this->changePanelsFields() ? 		$data[] = array('name' => 'panels',					'status' => TRUE) : $data[] = array('name' => 'panels', 				'status' => FALSE);
-			$this->changeSmileysFields() ? 		$data[] = array('name' => 'smileys',				'status' => TRUE) : $data[] = array('name' => 'smileys', 				'status' => FALSE);
+			$this->changeBlacklistFields() ? 		$data[] = array('name' => 'blacklist',				'status' => TRUE) : $data[] = array('name' => 'blacklist', 				'status' => FALSE);
+			$this->changeCommentsFields() ? 		$data[] = array('name' => 'comments',				'status' => TRUE) : $data[] = array('name' => 'comments', 				'status' => FALSE);
+			$this->changeMessagesFields() ? 		$data[] = array('name' => 'messages',				'status' => TRUE) : $data[] = array('name' => 'messages', 				'status' => FALSE);
+			$this->changeNewsFields() ? 			$data[] = array('name' => 'news',					'status' => TRUE) : $data[] = array('name' => 'news', 					'status' => FALSE);
+			$this->changeNewsCatsFields() ? 		$data[] = array('name' => 'news_cats',				'status' => TRUE) : $data[] = array('name' => 'news_cats', 				'status' => FALSE);
+			$this->changeOnlineFields() ? 			$data[] = array('name' => 'online',					'status' => TRUE) : $data[] = array('name' => 'online', 				'status' => FALSE);
+			$this->changePanelsFields() ? 			$data[] = array('name' => 'panels',					'status' => TRUE) : $data[] = array('name' => 'panels', 				'status' => FALSE);
+			$this->changeSmileysFields() ? 			$data[] = array('name' => 'smileys',				'status' => TRUE) : $data[] = array('name' => 'smileys', 				'status' => FALSE);
 		
 		}
 		elseif($num === 5)
 		{
 			// Przetwarzanie tabeli użytkowników
-			$this->changeUsersFields() ? 		$data[] = array('name' => 'users',					'status' => TRUE) : $data[] = array('name' => 'users', 					'status' => FALSE);
+			$this->changeUsersFields() ? 			$data[] = array('name' => 'users',					'status' => TRUE) : $data[] = array('name' => 'users', 					'status' => FALSE);
 		}
 		elseif($num === 6)
 		{
-
+	
 		}
 		elseif($num === 7)
 		{
@@ -343,7 +359,364 @@ class Converter
 
 		return $query;
 	}
+	
+	/*
+		Metoda prywatna, tworzy struktórę tabeli links
+	*/
+	private function createLinks() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."links` (
+			`id` int(7) unsigned NOT NULL AUTO_INCREMENT,
+			`link` VARCHAR(200) NOT NULL DEFAULT '',
+			`file` VARCHAR(100) NOT NULL DEFAULT '',
+			`full_path` VARCHAR(200) NOT NULL DEFAULT '',
+			`short_path` VARCHAR(100) NOT NULL DEFAULT '',
+			`datestamp` INT UNSIGNED NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`),
+			KEY `datestamp` (`datestamp`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
 		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli logs
+	*/
+	private function createLogs() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."logs` (
+			`id` int(7) unsigned NOT NULL AUTO_INCREMENT,
+			`action` text NOT NULL,
+			`datestamp` int(10) unsigned NOT NULL,
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli logs
+	*/
+	private function createNotes() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."notes` (
+			`id` SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+			`title` VARCHAR(64) NOT NULL,
+			`note` TEXT NOT NULL,
+			`author` MEDIUMINT UNSIGNED NOT NULL,
+			`block` SMALLINT UNSIGNED NOT NULL DEFAULT '0',
+			`datestamp` INT UNSIGNED NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli permissions
+	*/
+	private function createPermissions() 
+	{
+		$query_1 = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."permissions` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`name` varchar(127) CHARACTER SET latin1 NOT NULL,
+			`section` int(11) NOT NULL,
+			`description` varchar(255) NOT NULL,
+			`is_system` tinyint(1) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`),
+			UNIQUE KEY `name` (`name`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		$query_2 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."permissions` (`name`, `section`, `description`, `is_system`) VALUES
+			('admin.login', 1, '".$this->_lang['Perm: admin login']."', 1),
+			('site.login', 2, '".$this->_lang['Perm: user login']."', 1),
+			('site.comment.add', 2, '".$this->_lang['Perm: comment']."', 1),
+			('site.comment.edit', 2, '".$this->_lang['Perm: comment edit']."', 1),
+			('site.comment.edit.all', 2, '".$this->_lang['Perm: comment edit all']."', 1),
+			('site.comment.delete', 2, '".$this->_lang['Perm: comment delete']."', 1),
+			('site.comment.delete.all', 2, '".$this->_lang['Perm: comment delete all']."', 1),
+			('admin.bbcodes', 1, '".$this->_lang['Perm: admin bbcodes']."', 1),
+			('admin.blacklist', 1, '".$this->_lang['Perm: admin blacklist']."', 1),
+			('admin.comments', 1, '".$this->_lang['Perm: admin comments']."', 1),
+			('admin.logs', 1, '".$this->_lang['Perm: admin logs']."', 1),
+			('admin.urls', 1, '".$this->_lang['Perm: admin urls']."', 1),
+			('admin.news_cats', 1, '".$this->_lang['Perm: admin news_cats']."', 1),
+			('admin.news', 1, '".$this->_lang['Perm: admin news']."', 1),
+			('admin.panels', 1, '".$this->_lang['Perm: admin panels']."', 1),
+			('admin.permissions', 1, '".$this->_lang['Perm: admin permissions']."', 1),
+			('admin.phpinfo', 1, '".$this->_lang['Perm: admin phpinfo']."', 1),
+			('admin.groups', 1, '".$this->_lang['Perm: admin groups']."', 1),
+			('admin.security', 1, '".$this->_lang['Perm: admin security']."', 1),
+			('admin.settings', 1, '".$this->_lang['Perm: admin settings']."', 1),
+			('admin.settings_banners', 1, '".$this->_lang['Perm: admin settings_banners']."', 1),
+			('admin.settings_cache', 1, '".$this->_lang['Perm: admin settings_cache']."', 1),
+			('admin.settings_time', 1, '".$this->_lang['Perm: admin settings_time']."', 1),
+			('admin.settings_registration', 1, '".$this->_lang['Perm: admin settings_registration']."', 1),
+			('admin.settings_misc', 1, '".$this->_lang['Perm: admin settings_misc']."', 1),
+			('admin.settings_users', 1, '".$this->_lang['Perm: admin settings_users']."', 1),
+			('admin.settings_ipp', 1, '".$this->_lang['Perm: admin settings_ipp']."', 1),
+			('admin.settings_logs', 1, '".$this->_lang['Perm: admin settings_logs']."', 1),
+			('admin.navigations', 1, '".$this->_lang['Perm: admin navigations']."', 1),
+			('admin.smileys', 1, '".$this->_lang['Perm: admin smileys']."', 1),
+			('admin.upgrade', 1, '".$this->_lang['Perm: admin upgrade']."', 1),
+			('admin.user_fields', 1, '".$this->_lang['Perm: admin user_fields']."', 1),
+			('admin.user_fields_cats', 1, '".$this->_lang['Perm: admin user_fields_cats']."', 1),
+			('admin.users', 1, '".$this->_lang['Perm: admin users']."', 1)
+		");
+
+		return ($query_1 && $query_2 ? TRUE : FALSE);
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli permissions_sections
+	*/
+	private function createPermissionsSections() 
+	{
+		$query_1 = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."permissions_sections` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`name` varchar(128) NOT NULL,
+			`description` varchar(255) NOT NULL,
+			`is_system` tinyint(1) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		$query_2 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."permissions_sections` (`name`, `description`, `is_system`) VALUES ('admin', '".$this->_lang['Administration']."', 1), ('site', '".$this->_lang['Site']."', 1)");
+
+		return ($query_1 && $query_2 ? TRUE : FALSE);
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli groups
+	*/
+	private function createGroups() 
+	{
+		$query_1 = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."groups` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`title` varchar(127) NOT NULL,
+			`description` varchar(255) DEFAULT NULL,
+			`format` varchar(255) NOT NULL DEFAULT '{username}',
+			`permissions` text NOT NULL,
+			`team` tinyint(1) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		$query_2 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."groups` (`title`, `description`, `format`, `permissions`) VALUES ('".$this->_lang['Admin']."', '".$this->_lang['Group: admin']."', '<span style=\"color:#99bb00\">{username}</span>', '".serialize(array('*'))."'), ('".$this->_lang['User']."', '".$this->_lang['Group: user']."', '{username}', '".serialize(array('site.login', 'site.comment', 'site.comment.add', 'site.comment.edit'))."'), ('".$this->_lang['Guest']."', '".$this->_lang['Group: guest']."', '{username}', '".serialize(array())."')");
+
+		return ($query_1 && $query_2 ? TRUE : FALSE);
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli navigation
+	*/
+	private function createNavigation() 
+	{
+		$query_1 = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."navigation` (
+			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			`name` VARCHAR(100) NOT NULL DEFAULT '',
+			`url` VARCHAR(200) NOT NULL DEFAULT '',
+			`visibility` VARCHAR(255) NOT NULL DEFAULT '',
+			`position` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`window` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`order` SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0',
+			`rewrite` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		$query_2 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."navigation` (`name`, `url`, `visibility`, `position`, `window`, `order`) VALUES 
+			('".$this->_lang['Home']."', '', '3', '3', '0', '1'),
+			('".$this->_lang['News Cats']."', 'news_cats.html', '3', '3', '0', '2'),
+			('".$this->_lang['Users']."', 'users.html', '3', '3', '0', '3'),
+			('".$this->_lang['Team']."', 'team.html', '3', '2', '0', '3'),
+			('".$this->_lang['Rules']."', 'rules.html', '3', '2', '0', '4'),
+			('".$this->_lang['Tags']."', 'tags.html', '3', '1', '0', '4'),
+			('".$this->_lang['Pages']."', 'pages.html', '3', '3', '0', '5'),
+			('".$this->_lang['Search']."', 'search.html', '3', '3', '0', '6')
+		");
+
+		return ($query_1 && $query_2 ? TRUE : FALSE);
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli users_data
+	*/
+	private function createUsersData() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."users_data` (
+			`user_id` int(11) AUTO_INCREMENT NOT NULL,
+			`name` VARCHAR(200) NOT NULL DEFAULT '',
+			`old` VARCHAR(200) NOT NULL DEFAULT '',
+			`gg` VARCHAR(200) NOT NULL DEFAULT '',
+			`skype` VARCHAR(200) NOT NULL DEFAULT '',
+			`www` VARCHAR(200) NOT NULL DEFAULT '',
+			`location` VARCHAR(200) NOT NULL DEFAULT '',
+			`sig` TEXT NOT NULL,
+			PRIMARY KEY (`user_id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli users_online
+	*/
+	private function createUsersOnline() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."users_online` (
+			`user_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
+			`ip` VARCHAR(20) NOT NULL DEFAULT '0.0.0.0',
+			`last_activity`INT UNSIGNED NOT NULL DEFAULT '0',
+			UNIQUE `user` (`user_id`, `ip`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli modules
+	*/
+	private function createModules() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."modules` (
+			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			`title` VARCHAR(100) NOT NULL DEFAULT '',
+			`folder` VARCHAR(100) NOT NULL DEFAULT '',
+			`category` VARCHAR(100) NOT NULL DEFAULT '',
+			`version` VARCHAR(10) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli tags
+	*/
+	private function createTags() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."tags` (
+			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			`supplement` VARCHAR(100) NOT NULL DEFAULT '',
+			`supplement_id` MEDIUMINT UNSIGNED NOT NULL,
+			`value` TEXT NOT NULL,
+			`value_for_link` TEXT NOT NULL,
+			`access` VARCHAR(255) NOT NULL DEFAULT '',
+			PRIMARY KEY (`id`),
+			INDEX USING BTREE (supplement),
+			INDEX USING BTREE (supplement_id)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli pages
+	*/
+	private function createPages() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."pages` (
+			`id` SMALLINT UNSIGNED AUTO_INCREMENT,
+			`title` VARCHAR(255) NOT NULL DEFAULT '',
+			`content` TEXT NOT NULL,
+			`preview` MEDIUMTEXT NOT NULL,
+			`description` VARCHAR(255) NOT NULL DEFAULT '',
+			`type` SMALLINT UNSIGNED NOT NULL DEFAULT '0',
+			`categories` VARCHAR(255) NOT NULL DEFAULT '',
+			`author` SMALLINT UNSIGNED NOT NULL DEFAULT '0',
+			`date` INT UNSIGNED NOT NULL DEFAULT '0',
+			`url` VARCHAR(255) NOT NULL DEFAULT '',
+			`thumbnail` VARCHAR(255) NOT NULL DEFAULT '',
+			`settings` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`),
+			INDEX USING BTREE (type),
+			INDEX USING BTREE (categories),
+			INDEX USING BTREE (date),
+			INDEX USING BTREE (url)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli pages_types
+	*/
+	private function createPagesTypes() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."pages_types` (
+			`id` SMALLINT UNSIGNED AUTO_INCREMENT,
+			`name` VARCHAR(255) NOT NULL DEFAULT '',
+			`for_news_page` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`user_allow_edit_own` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`user_allow_use_wysiwyg` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`insight_groups` VARCHAR(255) NOT NULL DEFAULT '',
+			`editing_groups` VARCHAR(255) NOT NULL DEFAULT '',
+			`submitting_groups` VARCHAR(255) NOT NULL DEFAULT '',
+			`show_preview` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`add_author` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`change_author` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`add_last_editing_date` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`change_date` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			`show_author` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`show_category` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`show_date` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`show_tags` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`show_type` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			`user_allow_comments` TINYINT UNSIGNED NOT NULL DEFAULT '1',
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli pages_categories
+	*/
+	private function createPagesCategories() 
+	{
+		$query_1 = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."pages_categories` (
+			`id` SMALLINT UNSIGNED AUTO_INCREMENT,
+			`name` VARCHAR(255) NOT NULL DEFAULT '',
+			`description` MEDIUMTEXT NOT NULL,
+			`submitting_groups` VARCHAR(255) NOT NULL DEFAULT '',
+			`thumbnail` VARCHAR(255) NOT NULL DEFAULT '',
+			`is_system` TINYINT UNSIGNED NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`),
+			INDEX USING BTREE (name)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		$query_2 = $this->dbQuery("INSERT INTO `".$this->_db_prefix."pages_categories` (`name`, `description`, `submitting_groups`, `is_system`) VALUES ('".$this->_lang['No category']."', '".$this->_lang['No category desc']."', 0, 1)");
+
+		return ($query_1 && $query_2 ? TRUE : FALSE);
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli pages_custom_settings
+	*/
+	private function createPagesCustomSettings() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."pages_custom_settings` (
+			`id` SMALLINT UNSIGNED AUTO_INCREMENT,
+			`settings` MEDIUMTEXT NOT NULL,
+			PRIMARY KEY (`id`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
+	/*
+		Metoda prywatna, tworzy struktórę tabeli time_formats
+	*/
+	private function createTimeFormats() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."time_formats` (
+			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			`value` VARCHAR(100) NOT NULL DEFAULT '',
+			PRIMARY KEY (`id`),
+			UNIQUE KEY `value` (`value`)
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+		
+		return $query;
+	}
+
 	/*
 		Metoda prywatna, usuwa nie potrzebne w systemie eXtreme-Fusion tabele
 	*/
@@ -499,7 +872,6 @@ class Converter
 	*/
 	private function changeNewsFields() 
 	{
-		
 		$query = $this->dbQuery("ALTER TABLE `".$this->_db_prefix."news` 
 			DROP `news_rss`,
 			DROP `news_name`,
@@ -544,6 +916,25 @@ class Converter
 			ADD `link` VARCHAR(100) NOT NULL DEFAULT '' AFTER `name`, 
 			ENGINE = InnoDB	DEFAULT CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";
 		");
+		
+		if ($query)
+		{
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'bugs.png' WHERE `image` = 'bugs.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'downloads.png' WHERE `image` = 'downloads.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'eXtreme-fusion.png' WHERE `image` = 'eXtreme-fusion.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'games.png' WHERE `image` = 'games.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'graphics.png' WHERE `image` = 'graphics.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'hardware.png' WHERE `image` = 'hardware.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'journal.png' WHERE `image` = 'journal.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'users.png' WHERE `image` = 'users.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'mods.png' WHERE `image` = 'mods.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'movies.png' WHERE `image` = 'movies.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'network.png' WHERE `image` = 'network.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'news.png' WHERE `image` = 'news.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'security.png' WHERE `image` = 'security.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'software.png' WHERE `image` = 'software.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `image` = 'themes.png' WHERE `image` = 'themes.gif'");
+		}
 		
 		return $query;
 	}
