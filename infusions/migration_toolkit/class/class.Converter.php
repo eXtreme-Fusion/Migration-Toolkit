@@ -912,7 +912,7 @@ class Converter
 		if ($query)
 		{
 			// Aktualizacja widoczności newsów dla podstawowych grup
-			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `language` = '".$this->_lang['language']."' WHERE `language` = ''");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `language` = '".$this->_lang['language']."'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `access` = '3' WHERE `access` = '0'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `access` = '2' WHERE `access` = '101'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news` SET `access` = '1' WHERE `access` = '102' OR `access` = '103'");
