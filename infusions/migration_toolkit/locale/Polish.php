@@ -24,6 +24,9 @@ $EFC_Locale['EFC_160'] = "Nawigacja";
 $EFC_Locale['EFC_161'] = "Aktualnie online";
 $EFC_Locale['EFC_162'] = "Ostatnio na forum";
 
+
+$EFC_Locale['language'] = "Polish";
+
 // User Field
 $EFC_Locale['First name'] = "Imię";
 $EFC_Locale['Date of birth'] = "Data urodzenia";
