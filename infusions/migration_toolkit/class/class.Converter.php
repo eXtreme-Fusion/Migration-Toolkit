@@ -1059,7 +1059,8 @@ class Converter
 			CHANGE `user_name` `username` VARCHAR(30) NOT NULL DEFAULT '',
 			CHANGE `user_password` `password` CHAR(129) NOT NULL DEFAULT '',
 			ADD `salt` CHAR(5) NOT NULL DEFAULT '' AFTER `password`,
-			ADD `user_hash` VARCHAR(10) NOT NULL DEFAULT '' AFTER `salt`,
+			ADD `algo` VARCHAR(10) NOT NULL DEFAULT 'sha512' AFTER `salt`,
+			ADD `user_hash` VARCHAR(10) NOT NULL DEFAULT '' AFTER `algo`,
 			ADD `user_last_logged_in` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `user_hash`,
 			ADD `user_remember_me` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `user_last_logged_in`,
 			ADD `admin_hash` VARCHAR(10) NOT NULL DEFAULT '' AFTER `user_remember_me`,
@@ -1129,7 +1130,9 @@ class Converter
 		
 		$query_6 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `lang` = 'Polish' WHERE `lang` = ''");
 		
-		return ($query_1 && $query_2 && $query_3 && $query_4 && $query_5 && $query_6 ? TRUE : FALSE);	
+		$query_7 = $this->dbQuery("UPDATE `".$this->_db_prefix."users` SET `algo` = 'md5'");
+		
+		return ($query_1 && $query_2 && $query_3 && $query_4 && $query_5 && $query_6 && $query_7 ? TRUE : FALSE);	
 	}	
 	
 	/*
