@@ -103,6 +103,13 @@ else
 		setcookie("efc_lang", $settings['locale'], time() + 60);
 		setcookie("efc_vers", $settings['ep_version'], time() + 60);
 		setcookie("efc_core", TRUE, time() + 60);
+		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=2'>
+		<p><input type='submit' name='check' value='Dalej' /></p>
+		</form>";
+		
+	}
+	elseif($_GET['step'] == '2')
+	{
 		$r = $_EFC->stepNum(intval($_GET['step']));
 		echo"<p class='bold status info'>Krok 1: Tworzenie wymaganych tabel w bazie danych.</p>";
 		echo "<ul class='left'>";
@@ -118,12 +125,13 @@ else
 			}
 		}
 		echo "</ul>";
-		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=2'>
+		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=3'>
 		<p><input type='submit' name='check' value='Dalej' /></p>
 		</form>";
 	}
-	elseif($_GET['step'] == '2')
+	elseif($_GET['step'] == '3')
 	{
+		
 		$r = $_EFC->stepNum(intval($_GET['step']));
 		echo"<p class='bold status info'>Krok 2: Tworzenie struktury ustawień.</p>";
 		echo "<ul class='left'>";
@@ -139,11 +147,11 @@ else
 			}
 		}
 		echo "</ul>";
-		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=3'>
+		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=4'>
 		<p><input type='submit' name='check' value='Dalej' /></p>
 		</form>";
 	}
-	elseif($_GET['step'] == '3')
+	elseif($_GET['step'] == '4')
 	{
 		$r = $_EFC->stepNum(intval($_GET['step']));
 		echo"<p class='bold status info'>Krok 3: Usunięcie nie potrzebnych tabel w bazie danych.</p>";
@@ -237,34 +245,13 @@ else
 			}
 		}
 		echo "</ul>";
-		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=4'>
-		<p><input type='submit' name='check' value='Dalej' /></p>
-		</form>";
-	}
-	elseif($_GET['step'] == '4')
-	{
-		echo"<p class='bold status info'>Krok 4: Przetwarzanie pozostałych tabel.</p>";
-		$r = $_EFC->stepNum(intval($_GET['step']));
-		echo "<ul class='left'>";
-		foreach ($r as $value)
-		{
-			if ($value['status'] === TRUE)
-			{
-				echo "<li class='green'>Tabela: ". $db_prefix.$value['name'] ." została przetworzona.</li>";
-			}
-			else
-			{
-				echo "<li class='red'>Tabela: ". $db_prefix.$value['name'] ." nie została przetworzona, zgłoś ten błąd!</li>";
-			}
-		}
-		echo "</ul>";
 		echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=5'>
 		<p><input type='submit' name='check' value='Dalej' /></p>
 		</form>";
 	}
 	elseif($_GET['step'] == '5')
 	{
-		echo"<p class='bold status info'>Krok 5: Przetwarzanie pozostałych tabel.</p>";
+		echo"<p class='bold status info'>Krok 4: Przetwarzanie pozostałych tabel.</p>";
 		$r = $_EFC->stepNum(intval($_GET['step']));
 		echo "<ul class='left'>";
 		foreach ($r as $value)
@@ -306,7 +293,7 @@ else
 	}
 	elseif($_GET['step'] == '7')
 	{
-		echo"<p class='bold status info'>Krok 7: Przetwarzanie pozostałych tabel.</p>";
+		echo"<p class='bold status info'>Krok 5: Przetwarzanie pozostałych tabel.</p>";
 		$r = $_EFC->stepNum(intval($_GET['step']));
 		echo "<ul class='left'>";
 		foreach ($r as $value)
@@ -327,18 +314,18 @@ else
 	}
 	elseif($_GET['step'] == '8')
 	{
+		echo"<p class='bold status info'>Krok 7: Przetwarzanie pozostałych tabel.</p>";
 		$r = $_EFC->stepNum(intval($_GET['step']));
-		echo"<p class='bold status info'>Krok 8: Przeliczanie postów, tematów, odwiedzin z tabel forum.</p>";
 		echo "<ul class='left'>";
 		foreach ($r as $value)
 		{
 			if ($value['status'] === TRUE)
 			{
-				echo "<li class='green'>Operacja została wykonana pomyślnie.</li>";
+				echo "<li class='green'>Tabela: ". $db_prefix.$value['name'] ." została przetworzona.</li>";
 			}
 			else
 			{
-				echo "<li class='red'>Operacja nie została przetworzona, zgłoś ten błąd!</li>";
+				echo "<li class='red'>Tabela: ". $db_prefix.$value['name'] ." nie została przetworzona, zgłoś ten błąd!</li>";
 			}
 		}
 		echo "</ul>";

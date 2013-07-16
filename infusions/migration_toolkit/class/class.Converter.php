@@ -95,8 +95,13 @@ class Converter
 		$data = array();
 		if($num === 1)
 		{
+			// Towrzenie kopi bazy danych
+		}
+		elseif($num === 2)
+		{
 			// Tworzenie nowych tabel lub usuwanie starych i tworzenie nowej struktury
 			$this->createAdmin() ? 					$data[] = array('name' => 'admin',					'status' => TRUE) : $data[] = array('name' => 'admin', 					'status' => FALSE);
+			$this->createAdminFavourites() ? 		$data[] = array('name' => 'admin_favourites',		'status' => TRUE) : $data[] = array('name' => 'admin_favourites', 		'status' => FALSE);
 			$this->createBBcode() ? 				$data[] = array('name' => 'bbcode',					'status' => TRUE) : $data[] = array('name' => 'bbcode', 				'status' => FALSE);
 			$this->createUserFields() ? 			$data[] = array('name' => 'user_fields',			'status' => TRUE) : $data[] = array('name' => 'user_fields', 			'status' => FALSE);
 			$this->createUserFieldCats() ? 			$data[] = array('name' => 'user_field_cats',		'status' => TRUE) : $data[] = array('name' => 'user_field_cats',		'status' => FALSE);
@@ -117,17 +122,19 @@ class Converter
 			$this->createPagesCustomSettings() ?	$data[] = array('name' => 'pages_custom_settings',	'status' => TRUE) : $data[] = array('name' => 'pages_custom_settings',	'status' => FALSE);
 			$this->createTimeFormats() ?			$data[] = array('name' => 'time_formats',			'status' => TRUE) : $data[] = array('name' => 'time_formats',			'status' => FALSE);
 		}
-		elseif($num === 2)
+		elseif($num === 3)
 		{
 			// Tworzenie ustawień
 			$this->createSettings()  ? 				$data[] = array('name' => 'settings',				'status' => TRUE) : $data[] = array('name' => 'settings', 				'status' => FALSE);
 		}
-		elseif($num === 3)
+		elseif($num === 4)
 		{
 			// Usuwanie nie potrzebnych tabel w nowym systemie
 			$this->dropOldTables() ? 				$data[] = array('name' => 'drop_old_tables',		'status' => TRUE) : $data[] = array('name' => 'drop_old_tables', 		'status' => FALSE);
+			
+		
 		}
-		elseif($num === 4)
+		elseif($num === 5)
 		{
 			// Przetwarzanie istniejących tabel aby były zgodne z nowym systeme a dane nie zostały usunięte.
 			$this->changeBlacklistFields() ? 		$data[] = array('name' => 'blacklist',				'status' => TRUE) : $data[] = array('name' => 'blacklist', 				'status' => FALSE);
@@ -138,16 +145,11 @@ class Converter
 			$this->changeOnlineFields() ? 			$data[] = array('name' => 'online',					'status' => TRUE) : $data[] = array('name' => 'online', 				'status' => FALSE);
 			$this->changePanelsFields() ? 			$data[] = array('name' => 'panels',					'status' => TRUE) : $data[] = array('name' => 'panels', 				'status' => FALSE);
 			$this->changeSmileysFields() ? 			$data[] = array('name' => 'smileys',				'status' => TRUE) : $data[] = array('name' => 'smileys', 				'status' => FALSE);
-		
-		}
-		elseif($num === 5)
-		{
-			// Przetwarzanie tabeli użytkowników
-			$this->changeUsersFields() ? 			$data[] = array('name' => 'users',					'status' => TRUE) : $data[] = array('name' => 'users', 					'status' => FALSE);
 		}
 		elseif($num === 6)
 		{
-	
+			// Przetwarzanie tabeli użytkowników
+			$this->changeUsersFields() ? 			$data[] = array('name' => 'users',					'status' => TRUE) : $data[] = array('name' => 'users', 					'status' => FALSE);
 		}
 		elseif($num === 7)
 		{
@@ -275,6 +277,26 @@ class Converter
 			");
 
 		}
+		return $query;
+	}
+	
+	/*
+		Metoda prywatna, tworzy struktórę tabeli dla tabeli	admin
+	*/
+	private function createAdminFavourites() 
+	{
+		$query = $this->dbQuery("CREATE TABLE `".$this->_db_prefix."admin_favourites` (
+			`id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			`user_id` MEDIUMINT UNSIGNED NOT NULL,
+			`page_id` MEDIUMINT UNSIGNED NOT NULL,
+			`count` MEDIUMINT NOT NULL,
+			`time` INT UNSIGNED NOT NULL,
+			PRIMARY KEY (`id`),
+			UNIQUE KEY(`page_id`, `user_id`),
+			CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES ".$this->_db_prefix."admin(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES ".$this->_db_prefix."users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+		) ENGINE = InnoDB CHARACTER SET ".$this->_charset." COLLATE ".$this->_collate.";");
+
 		return $query;
 	}
 	
@@ -1342,6 +1364,7 @@ class Converter
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '10' WHERE `key` = 'users_per_page'");
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '11' WHERE `key` = 'comments_per_page'");
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".$this->_new_ef_version."' WHERE `key` = 'version'");
+				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '0' WHERE `key` = 'synchro'");
 				$query = $this->dbQuery("UPDATE ".$this->_db_prefix."settings SET `value` = '".serialize(array(
 						'site_normal_loging_time' => 60*60*5,			// 5h
 						'site_remember_loging_time' => 60*60*24*21,		// 21 days
@@ -1382,6 +1405,9 @@ class Converter
 	*/
 	private function dbQuery($query) 
 	{
+		echo "<pr>";
+		 print_r($query);
+		echo "</pr>";
 		$result = @mysql_query($query);
 		if ( ! $result) 
 		{
