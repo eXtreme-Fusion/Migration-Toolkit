@@ -25,6 +25,15 @@ else
 {
 	require_once '../../config.php';
 }
+/*
+if ( ! isset($settings['locale']))
+{
+	if (isset($_COOKIE["efc_".md5($aid)])) unset($_COOKIE["efc_".md5($aid)]);
+	if (isset($_COOKIE["efc_lang"])) unset($_COOKIE["efc_lang"]);
+	if (isset($_COOKIE["efc_vers"])) unset($_COOKIE["efc_vers"]);
+	if (isset($_COOKIE["efc_core"])) unset($_COOKIE["efc_core"]);
+	if (isset($_COOKIE["efc_superamdin"])) unset($_COOKIE["efc_superamdin"]);
+}*/
 
 $aid = (isset($_GET['aid']) ? $_GET['aid'] : '');
 

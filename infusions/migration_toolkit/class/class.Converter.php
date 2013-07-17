@@ -62,7 +62,7 @@ class Converter
 	protected $_ef_version 		= '4.17';
 	
 	// Przechowuje liczbę wywołań SQL
-	protected $_sql_count		= 0;
+	public $_sql_count = 0;
 
 	/*
 		Konstruktor klasy Converter
@@ -1404,12 +1404,14 @@ class Converter
 		return $query;
 	}
 	
-	
 	/*
 		Metoda prywatna, odpowiada za połączenie się z bazą i wykonie zapytań
 	*/
 	private function dbQuery($query) 
 	{
+		// Licznik wykonań SQL
+		$this->_sql_count++;
+		
 		$result = @mysql_query($query);
 		if ( ! $result) 
 		{
@@ -1419,9 +1421,7 @@ class Converter
 		else
 		{
 			return $result;
-		}
-		// Licznik wykonań SQL
-		$this->_sql_count++;
+		}		
 	}
 	
 	/*
@@ -1509,9 +1509,9 @@ class Converter
 	{
 		$db_connect = @mysql_connect($this->_db_host, $this->_db_user, $this->_db_pass);
 		$db_select = @mysql_select_db($this->_db_name);
-		@mysql_query("SET NAMES '".$this->_db_names."'");
-		@mysql_query("SET CHARSET '".$this->_db_charact."'");
-		@mysql_query("SET CHARACTER SET '".$this->_db_character."'");
+		$this->dbQuery("SET NAMES '".$this->_db_names."'");
+		$this->dbQuery("SET CHARSET '".$this->_db_charact."'");
+		$this->dbQuery("SET CHARACTER SET '".$this->_db_character."'");
 		if ( ! $db_connect) 
 		{
 			die("<div style='font-family:Verdana;font-size:11px;text-align:center;'><b>Unable to establish connection to MySQL</b><br>".mysql_errno()." : ".mysql_error()."</div>");
