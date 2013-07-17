@@ -1,129 +1,250 @@
-body {
-	margin: 0 auto;
+/*********************************************************
+| eXtreme-Fusion 5
+| Content Management System
+|
+| Copyright (c) 2005-2013 eXtreme-Fusion Crew
+| http://extreme-fusion.org/
+|
+| This program is released as free software under the
+| Affero GPL license. You can redistribute it and/or
+| modify it under the terms of this license which you
+| can read by viewing the included agpl.txt or online
+| at www.gnu.org/licenses/agpl.html. Removal of this
+| copyright header is strictly prohibited without
+| written permission from the original author(s).
+|
+**********************************************************
+                ORIGINALLY BASED ON
+---------------------------------------------------------+
+| PHP-Fusion Content Management System
+| Copyright (C) 2002 - 2011 Nick Jones
+| http://www.php-fusion.co.uk/
++--------------------------------------------------------+
+| Author: Nick Jones (Digitanium)
++--------------------------------------------------------+
+| This program is released as free software under the
+| Affero GPL license. You can redistribute it and/or
+| modify it under the terms of this license which you
+| can read by viewing the included agpl.txt or online
+| at www.gnu.org/licenses/agpl.html. Removal of this
+| copyright header is strictly prohibited without
+| written permission from the original author(s).
++--------------------------------------------------------*/
+
+* {margin: 0;padding: 0;}
+a {color:#666;text-decoration:none;}
+a img {border:none;}
+body {background:url(../images/iframe-shadow-top.png) repeat-x 0 81px;color:#333;font-size:12px;font-family:Tahoma,Geneva,Kalimati,sans-serif;margin:0;padding:0;}
+/* * table tr td, table tr td {margin:0;padding:0;border-spacing:0;width:100%} */
+.clear {clear:both;overflow:hidden;width:0;height:0;}
+.tab-cont{display:none}
+#leaders{
+	margin-right:10px;
+	padding-bottom:29px;
+}
+.center{text-align:center;margin-top:5px;font-size:10px;}
+.tab-click{margin:10px 0; text-align:center;font-weight:bold}
+.left{float:left;}
+.right{float:right}
+.red{color:red}
+p {padding:0;}
+.formWarning {padding:5px 10px; margin-bottom: 5px}
+.formValid {padding:5px 10px; margin-bottom: 5px}
+#team .bold {
+	padding-top:10px;
+}
+#team p {
+	margin: 5px 0;
 	padding: 0;
-	font-family: Verdana, Geneva, Tahoma, Trebuchet MS, Arial, Sans-serif;
-	font-size: 10px;
-	background: #000;
-	color: #fff;
-	min-height: 960px;
-	min-width: 960px;
-	max-width: 1200px;
+}
+.installFormLabel{
+	margin-bottom:5px;
+	font-family: "Myriad Pro",Verdana,sans-serif;
+    font-size: 12px;
+    text-align: right;
 }
 
-a { 
-	color:#fff; 
-	text-decoration:none;
+.formMessage {
+	overflow:hidden;
+	padding:5px 10px;
+	margin:0 0 10px 0;
+}
+.formMessage  input{
+
 }
 
-a:hover {
-	color:#DE8300A; 
-	text-decoration:underline; 
+.formMessage ul {
+	list-style-type: disc !important;
+	margin-left: 25px;
 }
 
-a.side {
-	color:#fff; 
-	text-decoration:none; 
+.formMessage label {
+
+}
+.formWarning {
+	border-radius: 8px;
+	background-color: rgba(255, 255, 50, 1);
+	margin-bottom: 10px;
+	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
+	border: 1px solid #38382c;
+}
+.formValid {
+	border-radius: 8px;
+	background-color: rgba(135,255,0,0.5);
+	margin-bottom: 10px;
+	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
+	border: 1px solid #38382c;
+}
+.synchro {margin-bottom:5px;}
+#CustomStep3 {display:none}
+#tab-crew-list {display:none;margin-top:10px}
+#crew-list {list-style:disc;cursor}
+ul > #crew-list{margin-left:15px}
+h1	{
+	color: #4b4b4b;
+	font-family: Tahoma;
+	font-size: 22px;
+	line-height: 24px;
+	font-weight: normal;
+	margin:15px 0 5px 0;
+	padding:0 0 0 26px;
+	}
+#simpleTooltip {
+	background:#3C3C3C url(../images/repeat.jpg) repeat-x 0 -37px;
+	max-width:260px;
+	line-height:1.4em;
+	color:#fff;
+	font-size:11px;
+	padding:4px 10px 6px 10px;
+	border:1px #010101 solid;
+	border-bottom:1px #262626 solid;
+	-moz-box-shadow:0px 0px 4px #010101;-webkit-box-shadow:0px 0px 4px #010101;box-shadow:0px 0px 4px #010101;
+	}
+/*=======================
+	Corner 4px
+========================*/
+.corner4px .ctl {background:url(../images/corner4px.png) no-repeat left -8px;font-size:1px;height:4px;}
+.corner4px .ctl .ctr {background:url(../images/shared/corner4px.png) no-repeat right 0;font-size:1px;margin:0 0 0 4px;}
+.corner4px .ctl .ctr .ctc {background:#fbfbfb;border-top:1px #ddd solid;height:4px;margin:0 4px 0 0;}
+.corner4px .cc {background:#fbfbfb;border-left:1px #ddd solid;border-right:1px #ddd solid;padding:3px 6px 0px 6px;}
+.corner4px .cfl {background:url(../images/corner4px.png) no-repeat left -12px;font-size:1px;height:4px;}
+.corner4px .cfl .cfr {background:url(../images/corner4px.png) no-repeat right -3px;font-size:1px;margin:0 0 0 4px;}
+.corner4px .cfl .cfr .cfc {background:#fbfbfb;border-bottom:1px #ddd solid;height:4px;margin:0 4px 0 0;}
+
+
+/*=======================
+	PL: Środek ramki <iframe>
+	EN: Frame Center
+========================*/
+#Content {
+	margin-left: auto;
+	margin-right: auto;
+	width: 994px;
+	}
+#Content .corner4px .cc {padding:13px 15px;}
+
+
+/* =============================
+	PL: Komunikaty
+	EN: Announcements
+============================= */
+.status, .info, .error, .valid {
+position: relative;
+margin: 6px 0 0;
+padding: 8px;
+border-radius: 8px;
+font-size: 12px;
+cursor: pointer;
+text-align: center;
+}
+div.status div, div.info div, div.error div, div.valid div {margin:0 65px 0 10px;}
+div.status a, div.info a, div.error a, div.valid a {font-weight:normal;text-decoration:underline;}
+.status-right, .info-right, .error-right, .valid-right {width:55px;position:absolute;top:0;right:-6px;}
+.status-right a, .info-right a, .error-right a, .valid-right a {cursor:pointer;}
+div.status {background:url(../images/messages-sprite.png) no-repeat 0 -70px;color:#e79300;}
+div.status a {color:#e79300;}
+div.info {background:url(../images/messages-sprite.png) no-repeat 0 -105px;color:#2e74b2;}
+div.info a {color:#2e74b2;}
+div.error	{background: url(../images/messages-sprite.png) no-repeat 0 -35px;color:#ce2700;}
+div.error a {color:#ce2700;}
+div.valid {background: url(../images/messages-sprite.png) no-repeat 0 0;color: #6da827;}
+div.valid a {color:#6da827;}
+
+#InstalationSteps {
+	font-size:12px;
+	float:left;
+	width:170px;
+	list-style:none;
+	padding-left:60px;
+}
+#InstalationSteps li {
+	line-height:30px;
+	padding-left:20px;
+	color:#ccc;
+}
+#InstalationSteps .done {
+	color:#74A102;
+}
+#InstalationSteps .bold {
+	font-weight:normal;
+	line-height:36px;
+	font-size:16px;
+	color:#121212;
+	background: url(images/step.png) no-repeat 0 0;
 }
 
-a:hover.side {
-	color:#EC8701; 
-	text-decoration:underline; 
-}
-h4 {
-	margin: 12px 0 4px 0;
-	padding: 9px 12px 2px 12px;
-	font-size: 14px;
-	font-weight: bold;
-	color: #999;
-	border-bottom: 1px solid #eee;
-}
-input[type=submit], 
+input[type=submit],
 .button {
 	min-height: 35px;
-	border: 1px solid #77A600;
-	color: #272727;
-	background: #aaff60;
+	min-width: 80px;
+	background-color: rgba(135,255,0,0.5);
+	margin-bottom: 10px;
+	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
+	border: 1px solid #38382c;
 	border-radius: 8px;
 }
-	
-input[type=submit]:hover, 
-.button:hover {background-position: 0 -40px; color: #373738;}
 
-
-.bold{font-weight:bold}
-.center {text-align:center}
-.left{text-align:left}
-.right{text-align:right}
-.red {color:red}
-.green{color:#1a5005}
-.small{font-size:9px;}
-
-.status, .info, .error, .valid {
-	margin: 10px 0;
-	padding: 9px 15px;
-	font-size: 12px;
-	text-align: center;
-	background: #feffff;
-	border-radius: 5px;
+input[type=submit]:hover,
+.button:hover {
+	min-height: 35px;
+	min-width: 80px;
+	border-radius: 8px;
+	background-color: rgba(255, 255, 50, 1);
+	margin-bottom: 10px;
+	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
+	border: 1px solid #38382c;
 }
 
-.status a, .info a, .error a, .valid a {
-	font-weight: bold;
-	text-decoration: underline;
+
+#MainBox {
+	float:left;
+	width:720px;
 }
 
-.status-right, .info-right, .error-right, .valid-right {
-	position: absolute;
-	top: 0;
-	right: -6px;
-	width: 55px;
-}
-
-.status-right a, .info-right a, .error-right a, .valid-right a {
-	cursor: pointer;
-}
-
-.status, .status a {color: #e79300;}
-.info, .info a {color: #2e74b2;}
-.error, .error a {color: #ce2700;}
-.valid, .valid a {color: #97be7a;}
-
-
-.quote,
 .code {
-	padding:2px 10px 6px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
-	border-radius:3px;
-	font-size:11px;
-	line-height:20px;
+	max-width: 700px;
+	padding:10px 10px 10px 10px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	font-size:10px;
+	line-height:10px;
 	color:#f5f5f5;
 	text-align:left;
 	font-weight: bold;
 	background-color:#3a3a3a;
-}
-
-.quote:before,
-.quote:after {
-	display:inline;
-	font-family:Georgia, serif;
-	font-size: 24px;
-	color:#7a7a7a;
-}
-
-.quote:before {
-	margin-right:3px;
-	content:"\201E";
-}
-
-.quote:after {
-	position:absolute;
-	margin:3px 0 0 3px;
-	content:"\201D";
-}
-
-.code {
-	padding:6px 10px;
+	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
 	font-family:Monaco, Menlo, Consolas, "Courier New", monospace;
 	white-space:nowrap;
+}
+
+.Valid{
+	text-underline-position: above; 
+	text-decoration: underline;
+	color: rgba(0, 255, 0, 0.9);
+}
+.Warning{
+	text-underline-position: above; 
+	text-decoration: underline;
+	color: rgba(255, 0, 0, 0.9);
 }

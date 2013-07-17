@@ -92,12 +92,13 @@ class Converter
 	*/
 	public function stepNum($num) 
 	{
+		//$num = 0;
 		$data = array();
-		if($num === 1)
+		if($num === 2)
 		{
 			// Towrzenie kopi bazy danych
 		}
-		elseif($num === 2)
+		elseif($num === 3)
 		{
 			// Tworzenie nowych tabel lub usuwanie starych i tworzenie nowej struktury
 			$this->createAdmin() ? 					$data[] = array('name' => 'admin',					'status' => TRUE) : $data[] = array('name' => 'admin', 					'status' => FALSE);
@@ -121,19 +122,19 @@ class Converter
 			$this->createPagesCustomSettings() ?	$data[] = array('name' => 'pages_custom_settings',	'status' => TRUE) : $data[] = array('name' => 'pages_custom_settings',	'status' => FALSE);
 			$this->createTimeFormats() ?			$data[] = array('name' => 'time_formats',			'status' => TRUE) : $data[] = array('name' => 'time_formats',			'status' => FALSE);
 		}
-		elseif($num === 3)
+		elseif($num === 4)
 		{
 			// Tworzenie ustawień
 			$this->createSettings()  ? 				$data[] = array('name' => 'settings',				'status' => TRUE) : $data[] = array('name' => 'settings', 				'status' => FALSE);
 		}
-		elseif($num === 4)
+		elseif($num === 5)
 		{
 			// Usuwanie nie potrzebnych tabel w nowym systemie
 			$this->dropOldTables() ? 				$data[] = array('name' => 'drop_old_tables',		'status' => TRUE) : $data[] = array('name' => 'drop_old_tables', 		'status' => FALSE);
 			
 		
 		}
-		elseif($num === 5)
+		elseif($num === 6)
 		{
 			// Przetwarzanie istniejących tabel aby były zgodne z nowym systeme a dane nie zostały usunięte.
 			$this->changeBlacklistFields() ? 		$data[] = array('name' => 'blacklist',				'status' => TRUE) : $data[] = array('name' => 'blacklist', 				'status' => FALSE);
@@ -145,26 +146,25 @@ class Converter
 			$this->changePanelsFields() ? 			$data[] = array('name' => 'panels',					'status' => TRUE) : $data[] = array('name' => 'panels', 				'status' => FALSE);
 			$this->changeSmileysFields() ? 			$data[] = array('name' => 'smileys',				'status' => TRUE) : $data[] = array('name' => 'smileys', 				'status' => FALSE);
 		}
-		elseif($num === 6)
+		elseif($num === 7)
 		{
 			// Przetwarzanie tabeli użytkowników
 			$this->changeUsersFields() ? 			$data[] = array('name' => 'users',					'status' => TRUE) : $data[] = array('name' => 'users', 					'status' => FALSE);
 		}
-		elseif($num === 7)
+		elseif($num === 8)
 		{
 			// Ze względu na kwerendę musi być tworzona później
 			$this->createAdminFavourites() ? 		$data[] = array('name' => 'admin_favourites',		'status' => TRUE) : $data[] = array('name' => 'admin_favourites', 		'status' => FALSE);
 		}
-		elseif($num === 8)
+		elseif($num === 9)
 		{
 
 		}
-		elseif($num === 9)
+		elseif($num === 10)
 		{
 			$site_url = explode('infusions', $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
 			
-			$data = "<div style='width:800px; margin:20px auto;'>\n";
-			$data .= "<div class='code'>";
+			$data = "<div class='code center'>";
 			$data .= '&lt;?php<br />';
 			$data .= '/*********************************************************<br />';
 			$data .= '| eXtreme-Fusion 5<br />';
@@ -221,7 +221,7 @@ class Converter
 
 			$data .= 'defined(\'CRYPT_KEY\') || define(\'CRYPT_KEY\', \''.md5(uniqid(time())).'\');<br />';
 			$data .= 'defined(\'CRYPT_IV\') || define(\'CRYPT_IV\', \''.substr(md5(uniqid(time())), 4, 8).'\');';
-			$data .= "</div></div>";
+			$data .= "</div>";
 		}
 		
 		return $data;
@@ -1409,7 +1409,7 @@ class Converter
 	private function dbQuery($query) 
 	{
 		echo "<pr>";
-		 print_r($query);
+		// print_r($query);
 		echo "</pr>";
 		$result = @mysql_query($query);
 		if ( ! $result) 
