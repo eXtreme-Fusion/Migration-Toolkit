@@ -101,7 +101,6 @@ class Converter
 		{
 			// Tworzenie nowych tabel lub usuwanie starych i tworzenie nowej struktury
 			$this->createAdmin() ? 					$data[] = array('name' => 'admin',					'status' => TRUE) : $data[] = array('name' => 'admin', 					'status' => FALSE);
-			$this->createAdminFavourites() ? 		$data[] = array('name' => 'admin_favourites',		'status' => TRUE) : $data[] = array('name' => 'admin_favourites', 		'status' => FALSE);
 			$this->createBBcode() ? 				$data[] = array('name' => 'bbcode',					'status' => TRUE) : $data[] = array('name' => 'bbcode', 				'status' => FALSE);
 			$this->createUserFields() ? 			$data[] = array('name' => 'user_fields',			'status' => TRUE) : $data[] = array('name' => 'user_fields', 			'status' => FALSE);
 			$this->createUserFieldCats() ? 			$data[] = array('name' => 'user_field_cats',		'status' => TRUE) : $data[] = array('name' => 'user_field_cats',		'status' => FALSE);
@@ -153,7 +152,8 @@ class Converter
 		}
 		elseif($num === 7)
 		{
-
+			// Ze względu na kwerendę musi być tworzona później
+			$this->createAdminFavourites() ? 		$data[] = array('name' => 'admin_favourites',		'status' => TRUE) : $data[] = array('name' => 'admin_favourites', 		'status' => FALSE);
 		}
 		elseif($num === 8)
 		{
@@ -268,6 +268,7 @@ class Converter
 				('admin.settings_ipp', 'settings_ipp.png', 'Item per Page', 'settings_ipp.php', 4),
 				('admin.settings_logs', 'logs.png', 'Logs', 'settings_logs.php', 4),
 				('admin.settings_login', 'login.png', 'Login', 'settings_login.php', 4),
+				('admin.settings_sychro', 'synchro.png', 'Synchronization', 'settings_synchro.php', 4),
 				('admin.settings_routing', 'router.png', 'Router', 'settings_routing.php', 4),
 				('admin.navigations', 'navigations.png', 'Site Links', 'navigations.php', 3),
 				('admin.smileys', 'smileys.png', 'Smileys', 'smileys.php', 3),
@@ -966,7 +967,7 @@ class Converter
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'graphics.png' WHERE `image` = 'graphics.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'hardware.png' WHERE `image` = 'hardware.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'journal.png' WHERE `image` = 'journal.gif'");
-			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'users.png' WHERE `image` = 'users.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'users.png' WHERE `image` = 'members.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'mods.png' WHERE `image` = 'mods.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'movies.png' WHERE `image` = 'movies.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'network.png' WHERE `image` = 'network.gif'");
@@ -974,6 +975,7 @@ class Converter
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'security.png' WHERE `image` = 'security.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'software.png' WHERE `image` = 'software.gif'");
 			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'themes.png' WHERE `image` = 'themes.gif'");
+			$this->dbQuery("UPDATE `".$this->_db_prefix."news_cats` SET `image` = 'windows.png' WHERE `image` = 'windows.gif'");
 		}
 		
 		return $query;
@@ -1270,7 +1272,8 @@ class Converter
 			ADD `notes_per_page` TEXT NOT NULL AFTER `news_per_page`,
 			ADD `users_per_page` TEXT NOT NULL AFTER `notes_per_page`,
 			ADD `comments_per_page` TEXT NOT NULL AFTER `users_per_page`,
-			ADD `notes` TEXT NOT NULL AFTER `version`,
+			ADD `synchro` TEXT NOT NULL AFTER `version`,
+			ADD `notes` TEXT NOT NULL AFTER `synchro`,
 			ADD `loging` TEXT NOT NULL AFTER `notes`,
 			ADD `routing` TEXT NOT NULL AFTER `loging`,
 			ADD `cache` TEXT NOT NULL AFTER `routing`

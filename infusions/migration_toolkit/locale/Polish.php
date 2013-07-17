@@ -73,6 +73,7 @@ $EFC_Locale['Perm: admin settings_misc'] = 'Dostęp do ustawień różnych.';
 $EFC_Locale['Perm: admin settings_users'] = 'Dostęp do ustawień użytkowników.';
 $EFC_Locale['Perm: admin settings_ipp'] = 'Ilość elementów na stronie.';
 $EFC_Locale['Perm: admin settings_logs'] = 'Dostęp do ustawień logów admina.';
+$EFC_Locale['Perm: admin settings_sychro'] = 'Dostęp do ustawień sychronizacji.';
 $EFC_Locale['Perm: admin navigations'] = 'Nawigacja strony';
 $EFC_Locale['Perm: admin smileys'] = 'Dostęp do emotikon na stronie';
 $EFC_Locale['Perm: admin submissions'] = 'Dostęp do nadesłanych materiałów';
