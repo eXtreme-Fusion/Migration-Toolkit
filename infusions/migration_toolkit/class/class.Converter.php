@@ -60,6 +60,9 @@ class Converter
 	
 	// Przechowuje numer wersji systemu eXtreme-Fusion z którego powinno się dokonać aktualizacji systemu
 	protected $_ef_version 		= '4.17';
+	
+	// Przechowuje liczbę wywołań SQL
+	protected $_sql_count		= 0;
 
 	/*
 		Konstruktor klasy Converter
@@ -140,7 +143,6 @@ class Converter
 			$this->changeBlacklistFields() ? 		$data[] = array('name' => 'blacklist',				'status' => TRUE) : $data[] = array('name' => 'blacklist', 				'status' => FALSE);
 			$this->changeCommentsFields() ? 		$data[] = array('name' => 'comments',				'status' => TRUE) : $data[] = array('name' => 'comments', 				'status' => FALSE);
 			$this->changeMessagesFields() ? 		$data[] = array('name' => 'messages',				'status' => TRUE) : $data[] = array('name' => 'messages', 				'status' => FALSE);
-			$this->changeNewsFields() ? 			$data[] = array('name' => 'news',					'status' => TRUE) : $data[] = array('name' => 'news', 					'status' => FALSE);
 			$this->changeNewsCatsFields() ? 		$data[] = array('name' => 'news_cats',				'status' => TRUE) : $data[] = array('name' => 'news_cats', 				'status' => FALSE);
 			$this->changeOnlineFields() ? 			$data[] = array('name' => 'online',					'status' => TRUE) : $data[] = array('name' => 'online', 				'status' => FALSE);
 			$this->changePanelsFields() ? 			$data[] = array('name' => 'panels',					'status' => TRUE) : $data[] = array('name' => 'panels', 				'status' => FALSE);
@@ -158,7 +160,7 @@ class Converter
 		}
 		elseif($num === 9)
 		{
-
+			$this->changeNewsFields() ? 			$data[] = array('name' => 'news',					'status' => TRUE) : $data[] = array('name' => 'news', 					'status' => FALSE);
 		}
 		elseif($num === 10)
 		{
@@ -1408,9 +1410,6 @@ class Converter
 	*/
 	private function dbQuery($query) 
 	{
-		echo "<pr>";
-		// print_r($query);
-		echo "</pr>";
 		$result = @mysql_query($query);
 		if ( ! $result) 
 		{
@@ -1421,6 +1420,8 @@ class Converter
 		{
 			return $result;
 		}
+		// Licznik wykonań SQL
+		$this->_sql_count++;
 	}
 	
 	/*
@@ -1454,6 +1455,13 @@ class Converter
 	public function geteXtremeFusionVersion() 
 	{
 		return $this->_ef_version;
+	}
+	/*
+		Metoda publiczna, zwraca numer wersji systemu eXtreme-Fusion
+	*/
+	public function getSQLQueries() 
+	{
+		return $this->_sql_count;
 	}
 	
 	/*
@@ -1513,5 +1521,11 @@ class Converter
 			die("<div style='font-family:Verdana;font-size:11px;text-align:center;'><b>Unable to select MySQL database</b><br>".mysql_errno()." : ".mysql_error()."</div>");
 		}
 	}
+	
+	public function getTime()
+	{
+		list($user, $sec) = explode(" ", microtime());
+		return ((float)$user+(float)$sec);
+    }
 }
 ?>

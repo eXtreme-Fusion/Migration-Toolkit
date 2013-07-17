@@ -15,6 +15,7 @@
 | written permission from the original author(s).
 | 
 **********************************************************/
+require_once '../../infusions/migration_toolkit/class/class.Converter.php';
 
 if ( ! isset($_COOKIE['efc_core']))
 {
@@ -36,9 +37,9 @@ else
 	include '../../infusions/migration_toolkit/locale/English.php';
 }
 
-require_once '../../infusions/migration_toolkit/class/class.Converter.php';
-
 $_EFC = New Converter($EFC_Locale, array($db_prefix, $db_host, $db_user, $db_pass, $db_name));
+
+$start_gen = $_EFC->getTime();
 
 if ( ! isset($_GET['step']) || ! preg_match("/^([0-9]{1,2})$/D", $_GET['step']))
 { 
@@ -48,6 +49,7 @@ if ($_GET['step'] <> '1' && ! isset($_POST['check']))
 { 
 	$_GET['step'] = '1';
 }
+
 $steps = array(
 	1 => "Najważniejsze informacje przed instalacją",
 	2 => "Tworzenie kopii bazy",
@@ -60,6 +62,9 @@ $steps = array(
 	9 => "Przetwarzanie pozostałych tabel",
 	10 => "Sukces! Migracja zakończona",
 );
+
+$cookies = 360;
+
 echo "
 <!DOCTYPE html>
 <html>
@@ -112,7 +117,7 @@ echo "
 					if((isset($_COOKIE['efc_core']) ? ! $_COOKIE['efc_core'] : ! iSUPERADMIN))
 					{
 						echo "<p class='formWarning center'>Jeśli chcesz użyć konwertera, musisz być zalogowany oraz posiadać rangę Super Administratora!</p>";
-						setcookie("efc_superamdin", TRUE, time() + 60);
+						setcookie("efc_superamdin", TRUE, time() + $cookies);
 					}
 					else
 					{
@@ -152,10 +157,10 @@ echo "
 						{	
 							echo "<div class='tbl2'>";
 							echo "<p class='formValid center'>Wykonaj prosze kopię bazy...<p>";
-							setcookie("efc_".md5($aid), $aid, time() + 60);
-							setcookie("efc_lang", $settings['locale'], time() + 60);
-							setcookie("efc_vers", $settings['ep_version'], time() + 60);
-							setcookie("efc_core", TRUE, time() + 60);
+							setcookie("efc_".md5($aid), $aid, time() + $cookies);
+							setcookie("efc_lang", $settings['locale'], time() + $cookies);
+							setcookie("efc_vers", $settings['ep_version'], time() + $cookies);
+							setcookie("efc_core", TRUE, time() + $cookies);
 							echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=3'>
 							<p><input type='submit' name='check' value='Dalej' /></p>
 							</form>";
@@ -418,7 +423,8 @@ echo "
 							
 						}
 					}
-					
+mysql_close();
+ob_end_flush();			
 echo '
 				</div>
 				<div class="clear"></div>
@@ -473,12 +479,24 @@ echo '
 				<p>Copyright © 2005 - 2013 by the <a href="http://extreme-fusion.org/" rel="copyright">eXtreme-Fusion</a> Crew</p>
 				<p>Copyright 2002-2013 <a href="http://php-fusion.co.uk/">PHP-Fusion</a>. Released as free software without warranties under <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">aGPL v3</a>.</p>
 			</div>
+			<hr />
+			<div class="right" style="font-size:xx-small;text-align:right;">';
+				$time_gen = $_EFC->getTime() - $start_gen;
+				if($time_gen >= 1) 
+				{
+					$time_gen = round($time_gen, 5).' sekund';
+				} 
+				elseif($time_gen < 1) 
+				{
+					$time_gen = (round($time_gen, 5)*1000).' milisekund ('.round($time_gen, 3).'s)';
+				}
+				echo 'Czas generowania strony: '.$time_gen.' <br />
+				Użycie pamięci: '.(memory_get_peak_usage(TRUE)/1048576).' Mb<br />
+				Ilość zapytań: '.$_EFC->getSQLQueries().'
+			</div>
+			<div class="clear" ></div>
 		</div>
 		<div class="cfl"><div class="cfr"><div class="cfc"></div></div></div></div>
-	</div>
-
-</body>
+	</body>
 </html>';
-mysql_close();
-ob_end_flush();
 ?>
