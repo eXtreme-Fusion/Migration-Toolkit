@@ -62,7 +62,7 @@ class Converter
 	protected $_ef_version 		= '4.17';
 	
 	// Przechowuje liczbę wywołań SQL
-	protected  $_sql_count 		= 0;
+	public $_sql_count = 0;
 
 	/*
 		Konstruktor klasy Converter
@@ -95,8 +95,7 @@ class Converter
 	*/
 	public function stepNum($num) 
 	{
-		// Odkomentuj jesli nie chcesz wykonywać zapytań
-		// $num = 0;
+		//$num = 0;
 		$data = array();
 		if($num === 2)
 		{
@@ -135,6 +134,8 @@ class Converter
 		{
 			// Usuwanie nie potrzebnych tabel w nowym systemie
 			$this->dropOldTables() ? 				$data[] = array('name' => 'drop_old_tables',		'status' => TRUE) : $data[] = array('name' => 'drop_old_tables', 		'status' => FALSE);
+			
+		
 		}
 		elseif($num === 6)
 		{

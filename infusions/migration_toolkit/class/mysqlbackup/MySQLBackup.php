@@ -152,15 +152,26 @@ class MySQLBackup {
         fwrite($out, $this->dumpDBSchema($delimiter));
         
         fclose($out);
-        
+
         $result = mysql_query("SHOW TABLES FROM `$this->_db`");
         
-        while (($row = mysql_fetch_row($result))){
-            
+        while (($row = mysql_fetch_row($result)))
+		{
             $tableName = $row[0];
-            $this->dumpTableDataCSV($tableName, "$backupFolder/$tableName.csv");
-            
-        }
+			$out = fopen("$backupFolder/$tableName.csv", "x");
+			
+			if( ! $out)
+			{
+				throw new BackupFileException();
+			}
+			// Wczeœniej nie tworzy³o plików cvs
+			// Teraz tworzy lecz nie zapisuje zawartosci
+			// Zwraca tylko NULL
+			// Piotrek ratuj :D
+			fwrite($out, $this->dumpTableDataCSV($tableName, "$backupFolder/$tableName.csv"));
+			
+			fclose($out);
+		}
         
         mysql_free_result($result);
         
@@ -247,8 +258,8 @@ class MySQLBackup {
                   FIELDS TERMINATED BY ',' 
                   ENCLOSED BY '\"' 
                   LINES TERMINATED BY '\n'";
-        
-        mysql_query($query, $this->_conn);
+				  
+		return  mysql_query($query, $this->_conn);
         
     }
     

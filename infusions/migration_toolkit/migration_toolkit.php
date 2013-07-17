@@ -176,11 +176,13 @@ echo "
 							echo "<p class='info'>Wykonaj prosze kopię bazy...<p>";
 							$_MSQLD->open();
 							$_MSQLD->backup('../../tmp');
+							
 							var_dump($_MSQLD);
 							setcookie("efc_".md5($aid), $aid, time() + $cookies);
 							setcookie("efc_lang", $settings['locale'], time() + $cookies);
 							setcookie("efc_vers", $settings['ep_version'], time() + $cookies);
 							setcookie("efc_core", TRUE, time() + $cookies);
+							echo "<p class='info'>Kopia bazy danych została wykonana i zapisana w katalogu /tmp...<p>";
 							echo "</div><form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=3'>
 							<p><input type='submit' name='check' value='Dalej' /></p>
 							</form>";
