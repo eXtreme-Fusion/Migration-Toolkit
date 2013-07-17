@@ -164,7 +164,7 @@ class MySQLBackup {
 			{
 				throw new BackupFileException();
 			}
-			// Wczeúniej nie tworzy≥o plikÛw cvs
+			// Wcze≈õniej nie tworzy≈Ço plik√≥w cvs
 			// Teraz tworzy lecz nie zapisuje zawartosci
 			// Zwraca tylko NULL
 			// Piotrek ratuj :D
