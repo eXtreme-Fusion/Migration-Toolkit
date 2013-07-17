@@ -150,25 +150,25 @@ h1	{
 ============================= */
 .status, .info, .error, .valid {
 position: relative;
-margin: 6px 0 0;
+margin: 0 0 6px;
 padding: 8px;
 border-radius: 8px;
 font-size: 12px;
 cursor: pointer;
 text-align: center;
 }
-div.status div, div.info div, div.error div, div.valid div {margin:0 65px 0 10px;}
-div.status a, div.info a, div.error a, div.valid a {font-weight:normal;text-decoration:underline;}
+.status div, .info div, .error div, .valid div {margin:0 65px 0 10px;}
+.status a, .info a, .error a, .valid a {font-weight:normal;text-decoration:underline;}
 .status-right, .info-right, .error-right, .valid-right {width:55px;position:absolute;top:0;right:-6px;}
 .status-right a, .info-right a, .error-right a, .valid-right a {cursor:pointer;}
-div.status {background:url(../images/messages-sprite.png) no-repeat 0 -70px;color:#e79300;}
-div.status a {color:#e79300;}
-div.info {background:url(../images/messages-sprite.png) no-repeat 0 -105px;color:#2e74b2;}
-div.info a {color:#2e74b2;}
-div.error	{background: url(../images/messages-sprite.png) no-repeat 0 -35px;color:#ce2700;}
-div.error a {color:#ce2700;}
-div.valid {background: url(../images/messages-sprite.png) no-repeat 0 0;color: #6da827;}
-div.valid a {color:#6da827;}
+.status {background:#FFF4CC; border:1px solid #F8E3AC; border-radius:3px; color:#e79300;}
+.status a {color:#e79300;}
+.info {background:#E4EDF5; border:1px solid #D8E1E9; border-radius:3px; color:#2e74b2;}
+.info a {color:#2e74b2;}
+.error	{background:#FBD3B1; border:1px solid #F5C69A; border-radius:3px; color:#ce2700;}
+.error a {color:#ce2700;}
+.valid {background: url(../images/messages-sprite.png) no-repeat 0 0;color: #6da827;}
+.valid a {color:#6da827;}
 
 #InstalationSteps {
 	font-size:12px;
@@ -196,32 +196,46 @@ div.valid a {color:#6da827;}
 input[type=submit],
 .button {
 	min-height: 35px;
-	min-width: 80px;
-	background-color: rgba(135,255,0,0.5);
+	min-width: 100px;
 	margin-bottom: 10px;
-	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
-	border: 1px solid #38382c;
-	border-radius: 8px;
+	border: 1px solid #77A600;
+	border-radius: 5px;
+	background: #b6e026;
+	background: -moz-linear-gradient(top, #b6e026 0%, #8ac000 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b6e026), color-stop(100%,#8ac000));
+	background: -webkit-linear-gradient(top, #b6e026 0%,#8ac000 100%);
+	background: -o-linear-gradient(top, #b6e026 0%,#8ac000 100%);
+	background: -ms-linear-gradient(top, #b6e026 0%,#8ac000 100%);
+	background: linear-gradient(to bottom, #b6e026 0%,#8ac000 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b6e026', endColorstr='#8ac000',GradientType=0 );
+	font-weight: bold;
+	text-shadow: 0px 1px 1px rgb(255, 255, 255);
+	color: rgb(39, 39, 39);
+	-moz-user-select: none;
+	cursor:pointer;
 }
 
 input[type=submit]:hover,
 .button:hover {
-	min-height: 35px;
-	min-width: 80px;
-	border-radius: 8px;
-	background-color: rgba(255, 255, 50, 1);
-	margin-bottom: 10px;
-	box-shadow: 0px 0 0 2px rgba(56,56,54,0.5);
-	border: 1px solid #38382c;
+	background: #8ac000;
+	background: -moz-linear-gradient(top, #8ac000 0%, #b6e026 97%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ac000), color-stop(97%,#b6e026));
+	background: -webkit-linear-gradient(top, #8ac000 0%,#b6e026 97%);
+	background: -o-linear-gradient(top, #8ac000 0%,#b6e026 97%);
+	background: -ms-linear-gradient(top, #8ac000 0%,#b6e026 97%);
+	background: linear-gradient(to bottom, #8ac000 0%,#b6e026 97%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ac000', endColorstr='#b6e026',GradientType=0 );
 }
 
 
-#MainBox {
+#MainBox
+{
 	float:left;
 	width:720px;
 }
 
-.code {
+.code
+{
 	max-width: 700px;
 	padding:10px 10px 10px 10px;
 	-webkit-border-radius:8px;
@@ -237,14 +251,29 @@ input[type=submit]:hover,
 	font-family:Monaco, Menlo, Consolas, "Courier New", monospace;
 	white-space:nowrap;
 }
-
-.Valid{
-	text-underline-position: above; 
-	text-decoration: underline;
-	color: rgba(0, 255, 0, 0.9);
+.Valid
+{
+	color: #2e74b2;
 }
-.Warning{
-	text-underline-position: above; 
-	text-decoration: underline;
-	color: rgba(255, 0, 0, 0.9);
+.Warning
+{
+	color: #ce2700;
+}
+
+header
+{
+	background: #121212;
+	height: 60px;
+	margin-bottom: 16px;
+	padding: 10px 0;
+}
+
+footer div
+{
+	font-size:xx-small;
+	text-align:left
+}
+footer div.right
+{
+	text-align:right;
 }
