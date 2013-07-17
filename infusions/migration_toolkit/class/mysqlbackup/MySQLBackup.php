@@ -1,9 +1,4 @@
 <?php
-require_once './exceptions/DBException.php';
-require_once './exceptions/BackupFolderException.php';
-require_once './exceptions/BackupFileException.php';
-require_once './exceptions/FunctionNotExistsException.php';
-
 /**
  * This simple class gives ability to perform <br>
  * MySQL database backup nad restore operations.
@@ -137,7 +132,7 @@ class MySQLBackup {
      * @throws BackupFileException
      * @throws FunctionNotExistsException
      */
-    public function backup($dstFolder = '/tmp', $delimiter = '$$') {
+    public function backup($dstFolder = 'tmp', $delimiter = '$$') {
         
         if(!mysql_select_db($this->_db, $this->_conn)){
             throw new DBException(mysql_error($this->_conn), mysql_errno($this->_conn));
@@ -158,7 +153,7 @@ class MySQLBackup {
         
         fclose($out);
         
-        $result = mysql_list_tables($this->_db, $this->_conn);
+        $result = mysql_query("SHOW TABLES FROM `$this->_db`");
         
         while (($row = mysql_fetch_row($result))){
             
@@ -223,7 +218,7 @@ class MySQLBackup {
         $ret .= $statement[1] . $delimiter . PHP_EOL;
         $ret .= "USE $this->_db $delimiter" . PHP_EOL;
         
-        $result = mysql_list_tables($this->_db, $this->_conn);
+        $result = mysql_query("SHOW TABLES FROM `$this->_db`");
         
         while (($row = mysql_fetch_row($result))){
             

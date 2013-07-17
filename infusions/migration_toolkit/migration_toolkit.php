@@ -16,6 +16,12 @@
 | 
 **********************************************************/
 require_once '../../infusions/migration_toolkit/class/class.Converter.php';
+require_once '../../infusions/migration_toolkit/class/mysqlbackup/MySQLBackup.php';
+require_once '../../infusions/migration_toolkit/class/mysqlbackup/exceptions/DBException.php';
+require_once '../../infusions/migration_toolkit/class/mysqlbackup/exceptions/BackupFolderException.php';
+require_once '../../infusions/migration_toolkit/class/mysqlbackup/exceptions/BackupFileException.php';
+require_once '../../infusions/migration_toolkit/class/mysqlbackup/exceptions/FunctionNotExistsException.php';
+require_once '../../infusions/migration_toolkit/class/mysqlbackup/NodePermissions.php';
 
 if ( ! isset($_COOKIE['efc_core']))
 {
@@ -46,7 +52,8 @@ else
 	include '../../infusions/migration_toolkit/locale/English.php';
 }
 
-$_EFC = New Converter($EFC_Locale, array($db_prefix, $db_host, $db_user, $db_pass, $db_name));
+$_EFC 	= New Converter($EFC_Locale, array($db_prefix, $db_host, $db_user, $db_pass, $db_name));
+$_MSQLD	= New MySQLBackup($db_host.':3306', $db_name, $db_user, $db_pass);
 
 $start_gen = $_EFC->getTime();
 
@@ -166,6 +173,9 @@ echo "
 						{	
 							echo "<div class='tbl2'>";
 							echo "<p class='formValid center'>Wykonaj prosze kopię bazy...<p>";
+							$_MSQLD->open();
+							$_MSQLD->backup('../../tmp');
+							var_dump($_MSQLD);
 							setcookie("efc_".md5($aid), $aid, time() + $cookies);
 							setcookie("efc_lang", $settings['locale'], time() + $cookies);
 							setcookie("efc_vers", $settings['ep_version'], time() + $cookies);
