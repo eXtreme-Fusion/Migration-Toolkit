@@ -99,11 +99,11 @@ echo "
 		<script src='../../infusions/migration_toolkit/javascripts/main.js'></script>
 	</head>
 	<body>
-		<div style='background: #121212; height: 60px; margin-bottom: 16px; padding: 10px 0;'>
+		<header>
 			<div class='container_12'>
 				<img src='../../infusions/migration_toolkit/images/extreme-fusion-logo.png' alt='Migration Toolkit ".$_EFC->geteXtremeFusionVersion()." » ".$_EFC->getNeweXtremeFusionVersion()."'>
 			</div>
-		</div>	
+		</header>	
 			<div id='Content'>
 			<div class='corner4px'><div class='ctl'><div class='ctr'><div class='ctc'></div></div></div><div class='cc'>
 				<div id='IframeOPT' class='container_12' >
@@ -132,7 +132,7 @@ echo "
 
 					if((isset($_COOKIE['efc_core']) ? ! $_COOKIE['efc_core'] : ! iSUPERADMIN))
 					{
-						echo "<p class='formWarning center'>Jeśli chcesz użyć konwertera, musisz być zalogowany oraz posiadać rangę Super Administratora!</p>";
+						echo "<p class='error'>Jeśli chcesz użyć konwertera, musisz być zalogowany oraz posiadać rangę Super Administratora!</p>";
 						setcookie("efc_superamdin", TRUE, time() + $cookies);
 					}
 					else
@@ -146,25 +146,26 @@ echo "
 							unset($_COOKIE["efc_superamdin"]);
 							if (isset($settings['ep_version']) && $settings['ep_version'] !== $_EFC->geteXtremeFusionVersion())
 							{
-								echo "<p class='formWarning center'>Jeśli chcesz użyć tego konwertera, musisz mieć zainstalowany CMS eXtreme-Fusion 4.17!</p>";
+								echo "<p class='error'>Jeśli chcesz użyć tego konwertera, musisz mieć zainstalowany CMS eXtreme-Fusion 4.17!</p>";
 							}
 							else
 							{
 								echo "
-								<p class='formValid'>Witaj w wtyczce, która pomoże Ci przekonwertować <a href='http://extreme-fusion.org/'>eXtreme-Fusion ".$_EFC->geteXtremeFusionVersion()."</a>, na system <a href='http://extreme-fusion.org/'>eXtreme-Fusion ".$_EFC->getNeweXtremeFusionVersion()."</a>. Jeśli jeszcze nie zrobiłeś kopii zapasowej bazy danych oraz plików na serwerze, teraz jest to najlepszy moment aby to uczynić, jeśli coś pójdzie nie tak będziesz mógł bez problemu przywrócić kopię bazy danych.</p>
-								<p class='formValid'>
+								<p class='info'>Witaj w wtyczce, która pomoże Ci przekonwertować <a href='http://extreme-fusion.org/'>eXtreme-Fusion ".$_EFC->geteXtremeFusionVersion()."</a>, na system <a href='http://extreme-fusion.org/'>eXtreme-Fusion ".$_EFC->getNeweXtremeFusionVersion()."</a>. Jeśli jeszcze nie zrobiłeś kopii zapasowej bazy danych oraz plików na serwerze, teraz jest to najlepszy moment aby to uczynić, jeśli coś pójdzie nie tak będziesz mógł bez problemu przywrócić kopię bazy danych.</p>
+								
+								<p class='error'>
 									Pamiętaj, jeśli zaczniesz operacje bez posiadania kopi swojej bazy danych narażasz się na utratę cennych danych.<br />
 									W przypadku gdy wtyczka napotkałaby błąd, Twoja strona mogła by działać nie stabilnie.<br />
 									Dlatego zaleca się aby przed wykonywaniem tej czynności zaopatrzyć się w kopię całej bazy danych którą wykonasz takim narzędziem jak PHPMyAdmin, Chive, SQLBuddy itp.<br />
 								</p>
 								
-								<p class='formValid'>Przed rozpoczęciem migracji proszę zapoznać się z licencją:<br /> <a id='AcceptLink' href='https://raw.github.com/extreme-fusion/eXtreme-Fusion-CMS/master/LICENSE' target='_blank'>aGPL v3 License</a></p>
+								<p class='status'>Przed rozpoczęciem migracji proszę zapoznać się z licencją:<br /> <a id='AcceptLink' href='https://raw.github.com/extreme-fusion/eXtreme-Fusion-CMS/master/LICENSE' target='_blank'>aGPL v3 License</a></p>
 								
-								<p class='formValid'>
+								<p class='info'>
 									Aby przejść do kolejnego kroku kliknij na przycisk <strong>\"Dalej\"</strong>.
 								</p>
 								<form method='post' class='center' action='".basename($_SERVER['PHP_SELF'])."?aid=".$aid."&amp;step=2'>
-								<p><input type='submit' name='check' value='Dalej' /></p>
+								<p><input type='submit' name='check' value='Dalej'/></p>
 								</form>
 							</div>";
 							}
@@ -172,7 +173,7 @@ echo "
 						elseif($_GET['step'] == '2')
 						{	
 							echo "<div class='tbl2'>";
-							echo "<p class='formValid center'>Wykonaj prosze kopię bazy...<p>";
+							echo "<p class='info'>Wykonaj prosze kopię bazy...<p>";
 							$_MSQLD->open();
 							$_MSQLD->backup('../../tmp');
 							var_dump($_MSQLD);
@@ -188,19 +189,18 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie tworzone są nowe tabele wymagene przez system.<p>";
+							echo "<p class='info'>Na tym etapie tworzone są nowe tabele wymagene przez system.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>".$db_prefix.$value['name']." została utworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix.$value['name']."</strong> została utworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>".$db_prefix.$value['name']." nie została utworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix.$value['name']."</strong> nie została utworzona.</li>";
 								}
 							}
 							echo "</ul>";
@@ -213,19 +213,18 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie przetwarzane są struktury tabel.<p>";
+							echo "<p class='info'>Na tym etapie przetwarzane są struktury tabel.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>". $db_prefix.$value['name'] ." została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> została przetworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>". $db_prefix.$value['name'] ." nie została przetworzona, zgłoś ten błąd!</li>";
+									echo "<li class='Warning'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> nie została przetworzona, zgłoś ten błąd!</li>";
 								}
 							}
 							echo "</ul>";
@@ -238,96 +237,95 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie usuwane są stare tabele nie potrzebne już w systemie.<p>";
+							echo "<p class='info'>Na tym etapie usuwane są stare tabele nie potrzebne już w systemie.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>".$db_prefix."articles</li>";
-									echo "<li class='Valid'>".$db_prefix."article_cats</li>";
-									echo "<li class='Valid'>".$db_prefix."custom_pages</li>";
-									echo "<li class='Valid'>".$db_prefix."downloads</li>";
-									echo "<li class='Valid'>".$db_prefix."download_cats</li>";
-									echo "<li class='Valid'>".$db_prefix."faqs</li>";
-									echo "<li class='Valid'>".$db_prefix."faq_cats</li>";
-									echo "<li class='Valid'>".$db_prefix."forums</li>";
-									echo "<li class='Valid'>".$db_prefix."forum_attachments</li>";
-									echo "<li class='Valid'>".$db_prefix."flood_control</li>";
-									echo "<li class='Valid'>".$db_prefix."infusions</li>";
-									echo "<li class='Valid'>".$db_prefix."messages_options</li>";
-									echo "<li class='Valid'>".$db_prefix."new_users</li>";
-									echo "<li class='Valid'>".$db_prefix."photos</li>";
-									echo "<li class='Valid'>".$db_prefix."photo_albums</li>";
-									echo "<li class='Valid'>".$db_prefix."poll_votes</li>";
-									echo "<li class='Valid'>".$db_prefix."polls</li>";
-									echo "<li class='Valid'>".$db_prefix."posts</li>";
-									echo "<li class='Valid'>".$db_prefix."ratings</li>";
-									echo "<li class='Valid'>".$db_prefix."submissions</li>";
-									echo "<li class='Valid'>".$db_prefix."vcode</li>";
-									echo "<li class='Valid'>".$db_prefix."buttons</li>";
-									echo "<li class='Valid'>".$db_prefix."cautions</li>";
-									echo "<li class='Valid'>".$db_prefix."cautions_config</li>";
-									echo "<li class='Valid'>".$db_prefix."colors</li>";
-									echo "<li class='Valid'>".$db_prefix."panels_article</li>";
-									echo "<li class='Valid'>".$db_prefix."panels_download</li>";
-									echo "<li class='Valid'>".$db_prefix."panels_forum</li>";
-									echo "<li class='Valid'>".$db_prefix."rss_builder</li>";
-									echo "<li class='Valid'>".$db_prefix."site_links</li>";
-									echo "<li class='Valid'>".$db_prefix."site_links_groups</li>";
-									echo "<li class='Valid'>".$db_prefix."threads</li>";
-									echo "<li class='Valid'>".$db_prefix."thread_notify</li>";
-									echo "<li class='Valid'>".$db_prefix."user_groups</li>";
-									echo "<li class='Valid'>".$db_prefix."eps_points</li>";
-									echo "<li class='Valid'>".$db_prefix."eps_rangs</li>";
-									echo "<li class='Valid'>".$db_prefix."forumrang</li>";
-									echo "<li class='Valid'>".$db_prefix."weblinks</li>";
-									echo "<li class='Valid'>".$db_prefix."weblink_cats</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."articles</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."article_cats</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."custom_pages</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."downloads</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."download_cats</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."faqs</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."faq_cats</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."forums</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."forum_attachments</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."flood_control</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."infusions</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."messages_options</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."new_users</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."photos</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."photo_albums</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."poll_votes</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."polls</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."posts</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."ratings</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."submissions</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."vcode</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."buttons</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."cautions</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."cautions_config</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."colors</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."panels_article</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."panels_download</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."panels_forum</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."rss_builder</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."site_links</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."site_links_groups</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."threads</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."thread_notify</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."user_groups</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."eps_points</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."eps_rangs</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."forumrang</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."weblinks</strong> została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>".$db_prefix."weblink_cats</strong> została przetworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>".$db_prefix."articles</li>";
-									echo "<li class='Warning'>".$db_prefix."article_cats</li>";
-									echo "<li class='Warning'>".$db_prefix."captcha</li>";
-									echo "<li class='Warning'>".$db_prefix."custom_pages</li>";
-									echo "<li class='Warning'>".$db_prefix."downloads</li>";
-									echo "<li class='Warning'>".$db_prefix."download_cats</li>";
-									echo "<li class='Warning'>".$db_prefix."faqs</li>";
-									echo "<li class='Warning'>".$db_prefix."faq_cats</li>";
-									echo "<li class='Warning'>".$db_prefix."forums</li>";
-									echo "<li class='Warning'>".$db_prefix."forum_attachments</li>";
-									echo "<li class='Warning'>".$db_prefix."flood_control</li>";
-									echo "<li class='Warning'>".$db_prefix."infusions</li>";
-									echo "<li class='Warning'>".$db_prefix."messages_options</li>";
-									echo "<li class='Warning'>".$db_prefix."new_users</li>";
-									echo "<li class='Warning'>".$db_prefix."photos</li>";
-									echo "<li class='Warning'>".$db_prefix."photo_albums</li>";
-									echo "<li class='Warning'>".$db_prefix."poll_votes</li>";
-									echo "<li class='Warning'>".$db_prefix."polls</li>";
-									echo "<li class='Warning'>".$db_prefix."posts</li>";
-									echo "<li class='Warning'>".$db_prefix."ratings</li>";
-									echo "<li class='Warning'>".$db_prefix."submissions</li>";
-									echo "<li class='Warning'>".$db_prefix."vcode</li>";
-									echo "<li class='Warning'>".$db_prefix."buttons</li>";
-									echo "<li class='Warning'>".$db_prefix."cautions</li>";
-									echo "<li class='Warning'>".$db_prefix."cautions_config</li>";
-									echo "<li class='Warning'>".$db_prefix."colors</li>";
-									echo "<li class='Warning'>".$db_prefix."panels_article</li>";
-									echo "<li class='Warning'>".$db_prefix."panels_download</li>";
-									echo "<li class='Warning'>".$db_prefix."panels_forum</li>";
-									echo "<li class='Warning'>".$db_prefix."rss_builder</li>";
-									echo "<li class='Warning'>".$db_prefix."site_links</li>";
-									echo "<li class='Warning'>".$db_prefix."site_links_groups</li>";
-									echo "<li class='Warning'>".$db_prefix."threads</li>";
-									echo "<li class='Warning'>".$db_prefix."thread_notify</li>";
-									echo "<li class='Warning'>".$db_prefix."user_groups</li>";
-									echo "<li class='Warning'>".$db_prefix."eps_points</li>";
-									echo "<li class='Warning'>".$db_prefix."eps_rangs</li>";
-									echo "<li class='Warning'>".$db_prefix."forumrang</li>";
-									echo "<li class='Warning'>".$db_prefix."weblinks</li>";
-									echo "<li class='Warning'>".$db_prefix."weblink_cats</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."articles</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."article_cats</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."captcha</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."custom_pages</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."downloads</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."download_cats</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."faqs</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."faq_cats</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."forums</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."forum_attachments</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."flood_control</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."infusions</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."messages_options</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."new_users</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."photos</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."photo_albums</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."poll_votes</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."polls</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."posts</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."ratings</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."submissions</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."vcode</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."buttons</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."cautions</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."cautions_config</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."colors</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."panels_article</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."panels_download</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."panels_forum</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."rss_builder</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."site_links</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."site_links_groups</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."threads</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."thread_notify</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."user_groups</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."eps_points</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."eps_rangs</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."forumrang</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."weblinks</strong> nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>".$db_prefix."weblink_cats</strong> nie została przetworzona.</li>";
 								}
 							}
 							echo "</ul>";
@@ -339,19 +337,18 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie przetwarzana jest reszta tabel.<p>";
+							echo "<p class='info'>Na tym etapie przetwarzana jest reszta tabel.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>". $db_prefix.$value['name'] ." została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> została przetworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>". $db_prefix.$value['name'] ." nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> nie została przetworzona.</li>";
 								}
 							}
 							echo "</ul>";
@@ -363,19 +360,18 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie przetwarzana jest reszta tabel.<p>";
+							echo "<p class='info'>Na tym etapie przetwarzana jest reszta tabel.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>". $db_prefix.$value['name'] ." została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> została przetworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>". $db_prefix.$value['name'] ." nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> nie została przetworzona.</li>";
 								}
 							}
 							echo "</ul>";
@@ -387,19 +383,18 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie przetwarzana jest reszta tabel.<p>";
+							echo "<p class='info'>Na tym etapie przetwarzana jest reszta tabel.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>". $db_prefix.$value['name'] ." została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> została przetworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>". $db_prefix.$value['name'] ." nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> nie została przetworzona.</li>";
 								}
 							}
 							echo "</ul>";
@@ -411,19 +406,18 @@ echo "
 						{
 							$r = $_EFC->stepNum(intval($_GET['step']));
 							echo "<div class='tbl2'>";
-							echo "<p class='formWarning'>Na tym etapie przetwarzana jest reszta tabel.<p>";
+							echo "<p class='info'>Na tym etapie przetwarzana jest reszta tabel.<p>";
 							
-							echo "<div class='tbl2'>Tabela:</div>";
 							echo "<ul class='left'>";
 							foreach ($r as $value)
 							{
 								if ($value['status'] === TRUE)
 								{
-									echo "<li class='Valid'>". $db_prefix.$value['name'] ." została przetworzona.</li>";
+									echo "<li class='Valid'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> została przetworzona.</li>";
 								}
 								else
 								{
-									echo "<li class='Warning'>". $db_prefix.$value['name'] ." nie została przetworzona.</li>";
+									echo "<li class='Warning'>Tabela <strong>". $db_prefix.$value['name'] ."</strong> nie została przetworzona.</li>";
 								}
 							}
 							echo "</ul>";
@@ -433,18 +427,19 @@ echo "
 						}
 						elseif($_GET['step'] == '10')
 						{
-							echo "<p class='formValid'>Sukces!<br />";
+							echo "<div class='tbl2'>";
+							echo "<p class='status'>Sukces!<br />";
 							echo "Twój system został zaktualizowany do najnowszej wersji systemu eXtreme-Fusion.<br />";
 							echo "Teraz możesz usunąć stare pliki z eXtreme-Fusion i wrzuciś pliki z nowego systemu eXtreme-Fusion.<br />";
 							echo "Wyedytuj plik config.php zamieniając jego zawartość na:<br /></p>";
 							echo "<div class='center'>".$_EFC->stepNum(intval($_GET['step']))."</div><br />";
-							echo "<p class='formValid'><a href='../../index.php' class='green bold'>Gdy skończysz wrzucać pliki na swój serwer oraz dokonasz edycji pliku config.php będziesz mógł zobaczyć swoją nową stronę klikając na ten napis.</a></p>";
-							
+							echo "<p class='info'><a href='../../index.php' class='green bold'>Gdy skończysz wrzucać pliki na swój serwer oraz dokonasz edycji pliku config.php będziesz mógł zobaczyć swoją nową stronę klikając na ten napis.</a></p>";
+							echo "</div>";
 						}
 					}
-mysql_close();
-ob_end_flush();			
-echo '
+				mysql_close();
+				ob_end_flush();
+				echo '
 				</div>
 				<div class="clear"></div>
 
@@ -494,28 +489,29 @@ echo '
 					</div>
 				</div>
 			</div>
-			<div class="center" >
-				<p>Copyright © 2005 - 2013 by the <a href="http://extreme-fusion.org/" rel="copyright">eXtreme-Fusion</a> Crew</p>
-				<p>Copyright 2002-2013 <a href="http://php-fusion.co.uk/">PHP-Fusion</a>. Released as free software without warranties under <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">aGPL v3</a>.</p>
-			</div>
-			<hr />
-			<div class="right" style="font-size:xx-small;text-align:right;">';
-				$time_gen = $_EFC->getTime() - $start_gen;
-				if($time_gen >= 1) 
-				{
-					$time_gen = round($time_gen, 5).' sekund';
-				} 
-				elseif($time_gen < 1) 
-				{
-					$time_gen = (round($time_gen, 5)*1000).' milisekund ('.round($time_gen, 3).'s)';
-				}
-				echo 'Czas generowania strony: '.$time_gen.' <br />
-				Użycie pamięci: '.(memory_get_peak_usage(TRUE)/1048576).' Mb<br />
-				Ilość zapytań: '.$_EFC->getSQLQueries().'
-			</div>
-			<div class="clear" ></div>
+			<div class="clear"></div>
+			<footer>
+				<div class="left">
+					<p>Copyright © 2005 - 2013 by the <a href="http://extreme-fusion.org/" rel="copyright">eXtreme-Fusion</a> Crew</p>
+					<p>Copyright 2002-2013 <a href="http://php-fusion.co.uk/">PHP-Fusion</a>. Released as free software without warranties under <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">aGPL v3</a>.</p>
+				</div>
+				<div class="right">';
+					$time_gen = $_EFC->getTime() - $start_gen;
+					if($time_gen >= 1) 
+					{
+						$time_gen = round($time_gen, 5).' sekund';
+					} 
+					elseif($time_gen < 1) 
+					{
+						$time_gen = (round($time_gen, 5)*1000).' milisekund ('.round($time_gen, 3).'s)';
+					}
+					echo 'Czas generowania strony: '.$time_gen.' <br />
+					Użycie pamięci: '.(memory_get_peak_usage(TRUE)/1048576).' Mb<br />
+					Ilość zapytań: '.$_EFC->getSQLQueries().'
+				</div>
+			</footer>
+			<div class="clear"></div>
 		</div>
-		<div class="cfl"><div class="cfr"><div class="cfc"></div></div></div></div>
 	</body>
 </html>';
 ?>
